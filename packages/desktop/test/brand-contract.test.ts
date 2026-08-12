@@ -39,31 +39,31 @@ const windowsQuickstart = readFileSync(
   'utf8',
 );
 
-describe('Noobi.ai 品牌命名', () => {
+describe('Aether.ai 品牌命名', () => {
   it('在 macOS Bundle 与 DMG 中使用精确的产品名称', () => {
-    expect(manifest.build.productName).toBe('Noobi.ai');
+    expect(manifest.build.productName).toBe('Aether.ai');
     expect(manifest.build.dmg.artifactName).toBe(
-      'Noobi.ai-${version}-${arch}.${ext}',
+      'Aether.ai-${version}-${arch}.${ext}',
     );
   });
 
   it('在 Windows 安装包与系统快捷方式中使用精确的产品名称', () => {
     expect(manifest.build.nsis.artifactName).toBe(
-      'Noobi.ai-${version}-windows-${arch}-setup.${ext}',
+      'Aether.ai-${version}-windows-${arch}-setup.${ext}',
     );
-    expect(manifest.build.nsis.shortcutName).toBe('Noobi.ai');
+    expect(manifest.build.nsis.shortcutName).toBe('Aether.ai');
   });
 
-  it('在主进程与界面中使用 Noobi.ai', () => {
-    expect(mainSource).toContain("const productName = 'Noobi.ai';");
-    expect(rendererHtml).toContain('<title>Noobi.ai</title>');
-    expect(rendererApp).toContain('<strong>Noobi.ai</strong>');
-    expect(projectRail).toContain('<strong>Noobi.ai</strong>');
+  it('在主进程与界面中使用 Aether.ai', () => {
+    expect(mainSource).toContain("const productName = 'Aether.ai';");
+    expect(rendererHtml).toContain('<title>Aether.ai</title>');
+    expect(rendererApp).toContain('<strong>Aether.ai</strong>');
+    expect(projectRail).toContain('<strong>Aether.ai</strong>');
   });
 
-  it('Windows 用户文档使用 Noobi.ai 且不展示旧产品品牌', () => {
+  it('Windows 用户文档使用 Aether.ai 且不展示旧产品品牌', () => {
     for (const document of [readme, desktopGuide, windowsQuickstart]) {
-      expect(document).toContain('Noobi.ai');
+      expect(document).toContain('Aether.ai');
     }
     expect(desktopGuide).not.toMatch(/\b(?:OpenGame|GameAgent)\b/);
   });

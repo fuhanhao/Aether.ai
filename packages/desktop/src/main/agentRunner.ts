@@ -479,14 +479,14 @@ export class AgentRunner {
           }
           this.activeSecrets = [];
         })().catch((error: unknown) => {
-          console.error('[GameAgent] Failed to finalize Agent process:', error);
+          console.error('[Aether.ai] Failed to finalize Agent process:', error);
         });
       });
 
       if (!credentialPipe) {
         await terminateProcessTree(child, true).catch((error: unknown) => {
           console.error(
-            '[Noobi.ai] Failed to stop rejected Agent process:',
+            '[Aether.ai] Failed to stop rejected Agent process:',
             error,
           );
         });
@@ -562,7 +562,7 @@ export class AgentRunner {
           latest,
           'lifecycle',
           '素材生成进行中',
-          `检测到新的素材文件，当前目录共 ${progress.fileCount} 个文件；Noobi.ai 将自动复用已有文件并继续补齐缺失项。`,
+          `检测到新的素材文件，当前目录共 ${progress.fileCount} 个文件；Aether.ai 将自动复用已有文件并继续补齐缺失项。`,
           currentTool?.name,
         );
       }
@@ -581,7 +581,7 @@ export class AgentRunner {
           ? '素材工具仍在处理'
           : `${active.providerLabel} 仍在处理`,
         generatingAssets
-          ? `已连续 ${formatDuration(state.idleMs)} 没有检测到新的素材文件或工具输出；Noobi.ai 正在监控，素材阶段最长空闲 ${formatDuration(this.assetIdleTimeoutMs)}。`
+          ? `已连续 ${formatDuration(state.idleMs)} 没有检测到新的素材文件或工具输出；Aether.ai 正在监控，素材阶段最长空闲 ${formatDuration(this.assetIdleTimeoutMs)}。`
           : `已连续 ${formatDuration(state.idleMs)} 没有收到新输出；Harness 正在监控，达到硬超时会自动结束本轮。`,
       );
       return;
@@ -607,7 +607,7 @@ export class AgentRunner {
     );
     void terminateProcessTreeWithEscalation(child).catch((error: unknown) => {
       console.error(
-        '[Noobi.ai] Failed to stop timed-out Agent process:',
+        '[Aether.ai] Failed to stop timed-out Agent process:',
         error,
       );
     });
@@ -727,7 +727,7 @@ export class AgentRunner {
           try {
             await this.options.recordApiUsage(usage);
           } catch (error) {
-            console.error('[Noobi.ai] Failed to persist API usage:', error);
+            console.error('[Aether.ai] Failed to persist API usage:', error);
           }
         }
       }

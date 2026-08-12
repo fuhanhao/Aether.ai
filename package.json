@@ -1,5 +1,5 @@
 {
-  "name": "@gameagent/gameagent",
+  "name": "@aetherai/aetherai",
   "version": "0.1.0",
   "engines": {
     "node": ">=20.0.0"
@@ -9,10 +9,10 @@
     "packages/*",
     "agent-test"
   ],
-  "description": "Noobi.ai: a desktop AI game-production workbench.",
+  "description": "Aether.ai: an AI-powered intelligent development workbench.",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Innate-Labs/Noobi.ai.git"
+    "url": "git+https://github.com/Innate-Labs/Aether.ai.git"
   },
   "config": {
     "sandboxImageUri": "ghcr.io/leigest519/opengame:0.6.0"

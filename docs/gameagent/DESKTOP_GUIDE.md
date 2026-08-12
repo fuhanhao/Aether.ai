@@ -1,4 +1,4 @@
-# Noobi.ai 桌面客户端使用说明
+# Aether.ai 桌面客户端使用说明
 
 ## 支持平台
 
@@ -7,7 +7,7 @@
   正式发行版发布。Windows on ARM、32 位 Windows 和便携版尚未支持。
 
 普通用户安装客户端不需要源码开发环境。Node.js、uv、Godot、Blender 与 Unity Hub 是插件或
-外部引擎工作流的可选依赖，不是打开 Noobi.ai 的前置条件。
+外部引擎工作流的可选依赖，不是打开 Aether.ai 的前置条件。
 
 ## 首次启动
 
@@ -55,9 +55,9 @@ Windows 版只通过主进程内置的 WinGet 白名单管理以下项目：
 | Blender       | `BlenderFoundation.Blender` | 3D 内容制作                      |
 | Unity Hub     | `Unity.UnityHub`            | Unity Editor 与模块仍由 Hub 管理 |
 
-Noobi.ai 不接受界面传入的 executable、package ID 或额外参数，也不会在缺少 WinGet 时改用
+Aether.ai 不接受界面传入的 executable、package ID 或额外参数，也不会在缺少 WinGet 时改用
 任意 PowerShell 下载脚本。WinGet 缺失时，请从 Microsoft Store 安装或更新“应用安装程序”。
-安装某些机器级工具可能触发 Windows UAC；取消后 Noobi.ai 会保留原状态。
+安装某些机器级工具可能触发 Windows UAC；取消后 Aether.ai 会保留原状态。
 
 macOS 使用对应的固定 Homebrew formula/cask 白名单。Unity Editor 在两个平台都只通过 Unity Hub
 安装和更新。
@@ -84,8 +84,8 @@ macOS 使用对应的固定 Homebrew formula/cask 白名单。Unity Editor 在�
 ## 从源码启动
 
 ```bash
-git clone https://github.com/Innate-Labs/Noobi.ai.git
-cd Noobi.ai
+git clone https://github.com/Innate-Labs/Aether.ai.git
+cd Aether.ai
 npm install
 npm run bundle
 npm run desktop
@@ -106,7 +106,7 @@ npm run desktop:package
 macOS DMG：
 
 ```text
-packages/desktop/release/Noobi.ai-<version>-arm64.dmg
+packages/desktop/release/Aether.ai-<version>-arm64.dmg
 ```
 
 Windows 11 x64 Setup EXE：
@@ -117,7 +117,7 @@ npm run desktop:verify:win
 ```
 
 ```text
-packages/desktop/release/Noobi.ai-<version>-windows-x64-setup.exe
+packages/desktop/release/Aether.ai-<version>-windows-x64-setup.exe
 ```
 
 普通本地构建默认未签名，只能用于开发验证。Windows 正式版必须通过 Authenticode 验证，macOS

@@ -1,10 +1,10 @@
 <div align="center">
-  <img src="docs/images/noobi-ai-app-icon.png" alt="Noobi.ai App 图标" width="112" />
-  <h1>Noobi.ai</h1>
-  <p><strong>把一个游戏想法，变成可运行、可继续迭代的本地项目。</strong></p>
+  <img src="docs/images/aether-ai-app-icon.png" alt="Aether.ai App 图标" width="112" />
+  <h1>Aether.ai</h1>
+  <p><strong>AI 驱动的智能开发工作台 — 让 Agent 在可见的工作区中规划、编码、调用工具并运行验证。</strong></p>
   <p>
-    面向 macOS 的本地优先 AI 游戏制作客户端；Windows 11 x64 未签名候选版已通过原生 CI。让 Agent 在可见的工作区中规划、
-    编码、调用工具、运行验证，并通过插件连接 Skills、MCP 与游戏引擎。
+    面向 macOS 的本地优先 AI 开发客户端；Windows 11 x64 候选版已通过原生 CI。通过插件连接 Skills、MCP 与各类开发工具，
+    将创意转化为可运行、可迭代的本地项目。
   </p>
   <p>
     <a href="#下载客户端">下载客户端</a>
@@ -15,43 +15,44 @@
     ·
     <a href="docs/gameagent/DESKTOP_GUIDE.md">使用文档</a>
     ·
-    <a href="https://github.com/Innate-Labs/Noobi.ai/issues">问题反馈</a>
+    <a href="https://github.com/Innate-Labs/Aether.ai/issues">问题反馈</a>
   </p>
   <p>
-    <img src="https://img.shields.io/badge/macOS-Apple%20Silicon-1b1d18" alt="macOS Apple Silicon" />
-    <img src="https://img.shields.io/badge/Windows%2011-x64%20candidate-2775ca" alt="Windows 11 x64 candidate" />
-    <img src="https://img.shields.io/badge/Electron-Desktop-47848f" alt="Electron Desktop" />
-    <img src="https://img.shields.io/badge/Agent-Skills%20%2B%20MCP-d69a2d" alt="Agent Skills and MCP" />
-    <img src="https://img.shields.io/badge/license-Apache--2.0-5e936f" alt="Apache-2.0 license" />
+    <img src="https://img.shields.io/badge/AI--Powered-00e5ff?style=for-the-badge&logo=openai&logoColor=white" alt="AI-Powered" />
+    <img src="https://img.shields.io/badge/Multi--Agent-7c4dff?style=for-the-badge&logo=robot&logoColor=white" alt="Multi-Agent" />
+    <img src="https://img.shields.io/badge/Electron-Desktop-00b8d4?style=for-the-badge&logo=electron&logoColor=white" alt="Electron Desktop" />
+    <img src="https://img.shields.io/badge/MCP-Native-651fff?style=for-the-badge&logo=plug&logoColor=white" alt="MCP Native" />
+    <img src="https://img.shields.io/badge/Holographic-UI-304ffe?style=for-the-badge&logo=graphql&logoColor=white" alt="Holographic UI" />
+    <img src="https://img.shields.io/badge/license-Apache--2.0-00e676?style=for-the-badge" alt="Apache-2.0 license" />
   </p>
 </div>
 
 <div align="center">
-  <img src="docs/images/noobi-ai-hero.png" alt="Noobi.ai IP 形象在 AI 游戏制作工作台中把创意组装成可玩游戏" width="100%" />
+  <img src="docs/images/aether-ai-hero.png" alt="Aether.ai — AI 驱动的智能开发工作台" width="100%" />
 </div>
 
 ## 下载客户端
 
 | 平台                    | 下载                                                                                                                             | 状态                                                                      |
 | ----------------------- | -------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------- |
-| **Windows 11 x64**      | **[下载 Noobi.ai v0.2.2 Windows 候选版](https://github.com/Innate-Labs/Noobi.ai/actions/runs/31561503301/artifacts/9127999575)** | 未签名开发候选版；已通过 Windows x64 原生 CI 的构建、启动、安装和卸载验证 |
-| **macOS Apple Silicon** | [前往 GitHub Releases](https://github.com/Innate-Labs/Noobi.ai/releases)                                                         | 当前发行基线；正式安装包以 Releases 页面为准                              |
+| **Windows 11 x64**      | **[下载 Aether.ai v0.2.2 Windows 候选版](https://github.com/Innate-Labs/Aether.ai/actions/runs/31561503301/artifacts/9127999575)** | 未签名开发候选版；已通过 Windows x64 原生 CI 的构建、启动、安装和卸载验证 |
+| **macOS Apple Silicon** | [前往 GitHub Releases](https://github.com/Innate-Labs/Aether.ai/releases)                                                         | 当前发行基线；正式安装包以 Releases 页面为准                              |
 
-Windows 下载内容为 `Noobi.ai-windows-x64-unsigned-dev` ZIP，解压后包含
-`Noobi.ai-0.2.2-windows-x64-setup.exe` 和对应的 `.sha256` 校验文件。GitHub Actions Artifact
+Windows 下载内容为 `Aether.ai-windows-x64-unsigned-dev` ZIP，解压后包含
+`Aether.ai-0.2.2-windows-x64-setup.exe` 和对应的 `.sha256` 校验文件。GitHub Actions Artifact
 需要登录 GitHub 下载，当前保留至 **2026-11-10**；后续正式签名版本将迁移到
-[GitHub Releases](https://github.com/Innate-Labs/Noobi.ai/releases)。
+[GitHub Releases](https://github.com/Innate-Labs/Aether.ai/releases)。
 
 > Windows 候选安装包尚未进行 Authenticode 代码签名，系统可能显示“未知发布者”或
 > SmartScreen 提示。它适合测试，不是正式发行版；请勿关闭 Windows 安全保护。
 
-## 产品业务：Noobi.ai 解决什么问题
+## 产品业务：Aether.ai 解决什么问题
 
 游戏原型制作横跨策划文档、素材服务、代码编辑器、终端、浏览器与游戏引擎。普通 AI 对话可以给出代码片段，却很难持续理解一个真实工程，更难让创作者看清它改了什么、调用了什么，以及失败后如何继续。
 
-Noobi.ai 把这些环节组织成一条可观察、可停止、可恢复的本地制作流程：
+Aether.ai 把这些环节组织成一条可观察、可停止、可恢复的本地制作流程：
 
-| 传统痛点                         | Noobi.ai 的处理方式                                                  |
+| 传统痛点                         | Aether.ai 的处理方式                                                  |
 | -------------------------------- | -------------------------------------------------------------------- |
 | 创意散落在聊天、文档和多个工具里 | 以本地项目为中心保存 Prompt、GDD、代码、素材与构建结果               |
 | Agent 工作像黑盒，出错后难定位   | 展示制作阶段、实时事件、Function Calling、文件变化与错误             |
@@ -60,12 +61,12 @@ Noobi.ai 把这些环节组织成一条可观察、可停止、可恢复的本�
 | 模型、密钥和本机依赖分散管理     | 在设置中统一管理 Provider、测速、Token 统计、开发者诊断与依赖        |
 | 中断一次就要从头开始             | 保留项目文件与 Session，可停止、恢复并继续迭代                       |
 
-Noobi.ai 面向独立游戏开发者、游戏策划、技术美术和小型制作团队。它的目标是缩短“想法 → 首个可玩版本 → 持续迭代”的路径，而不是替代创意判断、代码审查或最终质量把关。
+Aether.ai 面向独立游戏开发者、游戏策划、技术美术和小型制作团队。它的目标是缩短“想法 → 首个可玩版本 → 持续迭代”的路径，而不是替代创意判断、代码审查或最终质量把关。
 
 ## 从想法到可玩版本
 
 <div align="center">
-  <img src="docs/images/noobi-ai-workflow.png" alt="Noobi.ai 从创意、规划、制作、验证到试玩的产品工作流" width="100%" />
+  <img src="docs/images/aether-ai-workflow.png" alt="Aether.ai 从创意、规划、制作、验证到试玩的产品工作流" width="100%" />
 </div>
 
 1. **描述创意**：选择本地目录，用自然语言说明玩法、视角、主题与美术方向。
@@ -92,7 +93,7 @@ Noobi.ai 面向独立游戏开发者、游戏策划、技术美术和小型制�
 Skill 与 MCP 承担不同职责：
 
 - **Skill** 是 Agent 按需加载的专业说明和工作方法。安装 Skill 不等于已经连接编辑器。
-- **MCP** 是实际工具通道。保存配置后，Noobi.ai 会在**下一次 Agent 启动**时连接 Server、发现工具并提供给 Agent。
+- **MCP** 是实际工具通道。保存配置后，Aether.ai 会在**下一次 Agent 启动**时连接 Server、发现工具并提供给 Agent。
 - **依赖管理**只负责检测、安装、更新或打开宿主软件；它本身不是 Agent 控制通道。
 
 | 目标            | 当前接入方式     | 使用前提                                               |
@@ -111,7 +112,7 @@ Skill 与 MCP 承担不同职责：
 flowchart LR
   User["游戏创作者"] --> UI
 
-  subgraph Desktop["Noobi.ai Desktop"]
+  subgraph Desktop["Aether.ai Desktop"]
     UI["React 工作台<br/>项目 · Pipeline · Events · Inspector"]
     Settings["设置中心<br/>API · 开发者 · 依赖"]
     Plugins["插件中心<br/>Skills + MCP"]
@@ -186,7 +187,7 @@ flowchart TD
 
 ## 能力边界
 
-> Noobi.ai 是自动化开发工具，不是“一键生成商业成品”的无代码平台。
+> Aether.ai 是自动化开发工具，不是“一键生成商业成品”的无代码平台。
 
 - 当前内置、验证最完整的生产流程面向 **2D Phaser Web 游戏**；Unity、Godot、Unreal 与 Blender 依赖外部插件、MCP Server 和正确运行的本机环境。
 - 内置预览要求项目存在 <code>dist/index.html</code>；引擎项目需要在对应编辑器中运行。
@@ -203,7 +204,7 @@ flowchart TD
 - Windows 11 x64 未签名候选版（已通过原生 CI；完成代码签名和跨版本升级验收前不作为正式
   发行版；不包括 Windows on ARM、32 位 Windows、便携版和 Microsoft Store 版）
 
-安装版包含 Noobi.ai 自身运行所需组件。Node.js、uv、Godot、Blender、Unity Hub 等是特定
+安装版包含 Aether.ai 自身运行所需组件。Node.js、uv、Godot、Blender、Unity Hub 等是特定
 插件或游戏引擎工作流的可选本机依赖，可在“设置 → 依赖管理”中检测。
 
 ### 从源码开发的环境要求
@@ -214,8 +215,8 @@ flowchart TD
 ### 从源码启动
 
 ```bash
-git clone https://github.com/Innate-Labs/Noobi.ai.git
-cd Noobi.ai
+git clone https://github.com/Innate-Labs/Aether.ai.git
+cd Aether.ai
 npm install
 npm run bundle
 npm run desktop
@@ -241,7 +242,7 @@ npm run desktop:package
 macOS 当前版本产物：
 
 ```text
-packages/desktop/release/Noobi.ai-0.2.2-arm64.dmg
+packages/desktop/release/Aether.ai-0.2.2-arm64.dmg
 ```
 
 本地构建没有 Apple Developer ID 时不会获得 Apple 公证。首次打开可在 Finder 中按住 Control 点击应用并选择“打开”，或前往“系统设置 → 隐私与安全性”确认打开。
@@ -264,13 +265,13 @@ npm run desktop:package:win
 开发安装包位于：
 
 ```text
-packages/desktop/release/Noobi.ai-0.2.2-windows-x64-setup.exe
+packages/desktop/release/Aether.ai-0.2.2-windows-x64-setup.exe
 ```
 
 普通构建没有 Authenticode 签名，只适合内部测试，Windows 可能显示“未知发布者”或 SmartScreen
 提示。不要关闭系统保护；CI 会把开发安装包与 SHA-256 作为 `unsigned-dev` Actions Artifact
 上传。只有签名验证与 Windows 实机验收通过后，维护者才会把安装包、SHA-256 和签名状态发布到
-[GitHub Releases](https://github.com/Innate-Labs/Noobi.ai/releases)。正式构建需要配置 Windows 代码
+[GitHub Releases](https://github.com/Innate-Labs/Aether.ai/releases)。正式构建需要配置 Windows 代码
 签名凭据，并把仓库变量 `NOOBI_WINDOWS_SIGNER` 配置为证书 Subject 中的发布者名称，然后执行：
 
 ```powershell
@@ -281,8 +282,8 @@ npm run desktop:package:win:signed
 
 ```powershell
 npm run desktop:verify:win
-Get-FileHash packages/desktop/release/Noobi.ai-0.2.2-windows-x64-setup.exe -Algorithm SHA256
-Get-AuthenticodeSignature packages/desktop/release/Noobi.ai-0.2.2-windows-x64-setup.exe
+Get-FileHash packages/desktop/release/Aether.ai-0.2.2-windows-x64-setup.exe -Algorithm SHA256
+Get-AuthenticodeSignature packages/desktop/release/Aether.ai-0.2.2-windows-x64-setup.exe
 ```
 
 当前版本没有内置自动更新。安装新版时重新下载并运行 Setup EXE 完成覆盖安装；安装器配置为
@@ -325,10 +326,10 @@ GAMEAGENT_AGENT_IDLE_TIMEOUT_MS=360000 npm run desktop
 
 ## 许可证与品牌
 
-项目代码按 [Apache-2.0 License](LICENSE) 开放。Noobi.ai、其 IP 形象与桌面产品设计由 Innate Labs 维护。
+项目代码按 [Apache-2.0 License](LICENSE) 开放。Aether.ai、其 IP 形象与桌面产品设计由 Aether.ai 团队维护。
 
-第三方引擎、Skill、MCP 与品牌名称归各自权利人所有；这些名称仅用于说明兼容性与连接能力，不代表相关品牌对 Noobi.ai 的认可或背书。
+第三方引擎、Skill、MCP 与品牌名称归各自权利人所有；这些名称仅用于说明兼容性与连接能力，不代表相关品牌对 Aether.ai 的认可或背书。
 
 ## 参与贡献
 
-欢迎提交 [Issue](https://github.com/Innate-Labs/Noobi.ai/issues) 或 Pull Request。涉及第三方 Skill / MCP 时，请同时说明来源、许可证、运行依赖和安全边界。
+欢迎提交 [Issue](https://github.com/Innate-Labs/Aether.ai/issues) 或 Pull Request。涉及第三方 Skill / MCP 时，请同时说明来源、许可证、运行依赖和安全边界。

@@ -77,7 +77,7 @@ export function defaultSettings(): AppSettings {
       'https://api.deepseek.com',
       'deepseek-v4-flash',
     ),
-    defaultWorkspace: path.join(app.getPath('documents'), 'Noobi.ai Games'),
+    defaultWorkspace: path.join(app.getPath('documents'), 'Aether.ai Games'),
     permissionMode: 'yolo',
     developerMode: false,
   };

@@ -34,10 +34,10 @@ import type {
   StartAgentInput,
 } from '../shared/types.js';
 
-const productName = 'Noobi.ai';
+const productName = 'Aether.ai';
 const applicationId = 'com.gameagent.desktop';
 const packagedSmokeTest =
-  app.isPackaged && process.argv.includes('--noobi-smoke-test');
+  app.isPackaged && process.argv.includes('--aether-smoke-test');
 // Keep the internal Electron identity stable: operating-system credential
 // encryption and installer upgrades are tied to it. Changing it would make
 // existing API keys or application state unavailable.
@@ -201,7 +201,7 @@ async function createWindow(): Promise<void> {
 
   mainWindow.once('ready-to-show', () => {
     if (packagedSmokeTest) {
-      console.log('NOOBI_PACKAGED_SMOKE_READY');
+      console.log('AETHER_PACKAGED_SMOKE_READY');
       app.exit(0);
       return;
     }
@@ -403,7 +403,7 @@ function registerIpc(): void {
   secureHandle('dialog:choose-directory', async () => {
     const settings = store.getPublicSettings();
     const result = await dialog.showOpenDialog(mainWindow!, {
-      title: '选择 Noobi.ai 项目保存目录',
+      title: '选择 Aether.ai 项目保存目录',
       defaultPath: settings.defaultWorkspace,
       properties: ['openDirectory', 'createDirectory'],
     });
@@ -436,7 +436,7 @@ function registerIpc(): void {
         }),
       );
     } catch (error) {
-      console.error('[Noobi.ai] Failed to persist provider probe:', error);
+      console.error('[Aether.ai] Failed to persist provider probe:', error);
     }
     return result;
   });
@@ -462,7 +462,7 @@ function registerIpc(): void {
         type: 'warning',
         title: `${input.action === 'install' ? '安装' : '更新'} ${dependency.name}`,
         message: `确认${input.action === 'install' ? '安装' : '更新'} ${dependency.name}？`,
-        detail: `Noobi.ai 只会执行内置白名单中的${dependency.management === 'winget' ? ' WinGet' : ' Homebrew'} 命令；过程可能持续数分钟。`,
+        detail: `Aether.ai 只会执行内置白名单中的${dependency.management === 'winget' ? ' WinGet' : ' Homebrew'} 命令；过程可能持续数分钟。`,
         buttons: ['取消', input.action === 'install' ? '开始安装' : '开始更新'],
         defaultId: 0,
         cancelId: 0,
@@ -637,7 +637,7 @@ app
     if (!platformSupport.supported) {
       dialog.showErrorBox(
         '当前系统不受支持',
-        platformSupport.message ?? '当前系统无法运行此版本的 Noobi.ai。',
+        platformSupport.message ?? '当前系统无法运行此版本的 Aether.ai。',
       );
       app.quit();
       return;
@@ -646,8 +646,8 @@ app
       if (!safeStorage.isEncryptionAvailable()) {
         throw new Error('系统安全存储不可用。');
       }
-      const encrypted = safeStorage.encryptString('noobi-smoke-sentinel');
-      if (safeStorage.decryptString(encrypted) !== 'noobi-smoke-sentinel') {
+      const encrypted = safeStorage.encryptString('aether-smoke-sentinel');
+      if (safeStorage.decryptString(encrypted) !== 'aether-smoke-sentinel') {
         throw new Error('系统安全存储往返验证失败。');
       }
     }
@@ -675,7 +675,7 @@ app
         void agentEvents
           .append(event, getHistorySecrets())
           .catch((error: unknown) =>
-            console.error('[GameAgent] Failed to persist Agent event:', error),
+            console.error('[Aether.ai] Failed to persist Agent event:', error),
           );
         mainWindow?.webContents.send('agent:event', event);
       },
@@ -691,7 +691,7 @@ app
     });
   })
   .catch((error: unknown) => {
-    console.error('[GameAgent] Desktop startup failed:', error);
+    console.error('[Aether.ai] Desktop startup failed:', error);
     app.quit();
   });
 
@@ -713,7 +713,7 @@ app.on('before-quit', (event) => {
     quitReady = true;
     app.quit();
   })().catch((error: unknown) => {
-    console.error('[GameAgent] Shutdown cleanup failed:', error);
+    console.error('[Aether.ai] Shutdown cleanup failed:', error);
     quitReady = true;
     app.quit();
   });

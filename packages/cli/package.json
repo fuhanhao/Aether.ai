@@ -1,10 +1,10 @@
 {
   "name": "@opengame/opengame",
   "version": "0.6.0",
-  "description": "Noobi.ai CLI: an agent runtime for end-to-end game production.",
+  "description": "Aether.ai CLI: an agent runtime for end-to-end game production.",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Innate-Labs/Noobi.ai.git"
+    "url": "git+https://github.com/Innate-Labs/Aether.ai.git"
   },
   "type": "module",
   "main": "dist/index.js",

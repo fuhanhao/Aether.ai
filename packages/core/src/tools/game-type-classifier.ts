@@ -152,7 +152,7 @@ class GameTypeClassifierInvocation extends BaseToolInvocation<
       type: 'info',
       title: '确认创建游戏脚手架',
       prompt:
-        `Noobi.ai 将在 ${this.config.getTargetDir()} 中复制核心模板、类型模块与契约文档。` +
+        `Aether.ai 将在 ${this.config.getTargetDir()} 中复制核心模板、类型模块与契约文档。` +
         '已有普通文件会保留，符号链接和越界路径会被拒绝。',
       onConfirm: async () => undefined,
     };

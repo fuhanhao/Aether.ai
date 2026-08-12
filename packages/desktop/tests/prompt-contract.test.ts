@@ -270,8 +270,8 @@ describe('OpenGame prompt contract', () => {
     const canonicalProjectRoot = await realpath(projectRoot);
     const promptPath = path.join(projectRoot, 'windows-path-prompt.md');
     const templatesDir =
-      'C:\\Users\\runneradmin\\Noobi.ai\\game-skill\\templates';
-    const docsDir = 'D:\\游戏素材\\Noobi.ai\\docs';
+      'C:\\Users\\runneradmin\\Aether.ai\\game-skill\\templates';
+    const docsDir = 'D:\\游戏素材\\Aether.ai\\docs';
     await writeFile(
       promptPath,
       [

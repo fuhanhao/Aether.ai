@@ -43,7 +43,7 @@ export function ProjectRail({
           <img src={brandIcon} alt="" />
         </div>
         <div>
-          <strong>Noobi.ai</strong>
+          <strong>Aether.ai</strong>
           <span>AI GAME AGENT</span>
         </div>
       </button>

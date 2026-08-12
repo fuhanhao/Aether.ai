@@ -584,7 +584,7 @@ function ApiPanel({
           <span>API CONTROL / LOCAL TELEMETRY</span>
           <h3>API 管理与调用</h3>
           <p>
-            配置服务、执行基础测速，并查看 Noobi.ai 在本机记录的调用与 Token。
+            配置服务、执行基础测速，并查看 Aether.ai 在本机记录的调用与 Token。
           </p>
         </div>
         <button
@@ -1151,7 +1151,7 @@ function DeveloperPanel({
                     <small>
                       {currentTool
                         ? currentTool.message
-                        : 'Noobi.ai 当前采用全应用单任务互斥；没有后台隐藏队列。'}
+                        : 'Aether.ai 当前采用全应用单任务互斥；没有后台隐藏队列。'}
                     </small>
                   </div>
                 </div>

@@ -1,4 +1,4 @@
-# Noobi.ai 仓库开发说明
+# Aether.ai 仓库开发说明
 
 ## 规格驱动开发
 
@@ -17,7 +17,7 @@
 ## 开发 Skills 与产品插件的边界
 
 - `.agents/skills/speckit-*` 是维护本仓库的开发 Agent 使用的 Skills。
-- 这些 Skills 不是 Noobi.ai 的运行时插件，不得自动展示在客户端插件目录中。
+- 这些 Skills 不是 Aether.ai 的运行时插件，不得自动展示在客户端插件目录中。
 - 产品 Agent 的 Skills 和 MCP 集成必须继续使用应用已经校验的用户级或项目级
   插件路径，并遵守相应的信任控制。
 

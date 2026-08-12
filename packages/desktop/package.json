@@ -1,9 +1,9 @@
 {
-  "name": "@gameagent/desktop",
+  "name": "@aetherai/desktop",
   "version": "0.2.2",
   "private": true,
   "type": "module",
-  "description": "Noobi.ai desktop AI game-production workbench",
+  "description": "Aether.ai desktop AI-powered development workbench",
   "main": "dist/main/main.js",
   "scripts": {
     "clean:main": "node scripts/clean-main.mjs",
@@ -50,8 +50,8 @@
   },
   "build": {
     "appId": "com.gameagent.desktop",
-    "productName": "Noobi.ai",
-    "copyright": "Copyright © Innate Labs",
+    "productName": "Aether.ai",
+    "copyright": "Copyright © Aether.ai",
     "electronVersion": "43.3.0",
     "asar": true,
     "directories": {
@@ -125,7 +125,7 @@
       ]
     },
     "nsis": {
-      "artifactName": "Noobi.ai-${version}-windows-${arch}-setup.${ext}",
+      "artifactName": "Aether.ai-${version}-windows-${arch}-setup.${ext}",
       "oneClick": false,
       "perMachine": false,
       "selectPerMachineByDefault": false,
@@ -133,14 +133,14 @@
       "allowToChangeInstallationDirectory": true,
       "createDesktopShortcut": "always",
       "createStartMenuShortcut": true,
-      "shortcutName": "Noobi.ai",
-      "uninstallDisplayName": "Noobi.ai ${version}",
+      "shortcutName": "Aether.ai",
+      "uninstallDisplayName": "Aether.ai ${version}",
       "deleteAppDataOnUninstall": false,
       "packElevateHelper": false
     },
     "dmg": {
-      "artifactName": "Noobi.ai-${version}-${arch}.${ext}",
-      "title": "Noobi.ai ${version}",
+      "artifactName": "Aether.ai-${version}-${arch}.${ext}",
+      "title": "Aether.ai ${version}",
       "backgroundColor": "#151711",
       "iconSize": 112,
       "window": {

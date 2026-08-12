@@ -47,7 +47,7 @@ export function App() {
   const [error, setError] = useState('');
   const [refreshToken, setRefreshToken] = useState(0);
   const [theme, setTheme] = useState<'dark' | 'light'>(() =>
-    localStorage.getItem('gameagent-theme') === 'light' ? 'light' : 'dark',
+    localStorage.getItem('aether-theme') === 'light' ? 'light' : 'dark',
   );
 
   const selected = useMemo(
@@ -57,7 +57,7 @@ export function App() {
 
   useEffect(() => {
     document.documentElement.dataset.theme = theme;
-    localStorage.setItem('gameagent-theme', theme);
+    localStorage.setItem('aether-theme', theme);
   }, [theme]);
 
   useEffect(() => {
@@ -213,7 +213,7 @@ export function App() {
         <div className="loading-mark">
           <img src={brandIcon} alt="" />
         </div>
-        <strong>Noobi.ai</strong>
+        <strong>Aether.ai</strong>
         <span>AI GAME AGENT · 正在连接 Runtime…</span>
       </div>
     );
@@ -408,7 +408,7 @@ function EmptyWorkspace({ onCreate }: { onCreate: () => void }) {
         <br />
         完整游戏工程。
       </h1>
-      <p>Noobi.ai 会选择模板、生成 GDD 与素材、编写代码，并持续构建验证。</p>
+      <p>Aether.ai 会自动选择模板、生成设计文档与素材、编写代码，并持续构建验证。</p>
       <button className="hero-button" onClick={onCreate}>
         <Sparkles size={16} />
         创建第一个游戏

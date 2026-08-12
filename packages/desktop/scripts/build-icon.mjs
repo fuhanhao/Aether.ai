@@ -11,7 +11,7 @@ const desktopRoot = path.resolve(scriptDir, '..');
 const buildDir = path.join(desktopRoot, 'build');
 // Keep icon.svg as the original fallback. The branded mascot is the current
 // source for both packaged desktop icons and the in-app brand mark.
-const source = path.join(buildDir, 'gameagent-platypus-dopey-v2.png');
+const source = path.join(buildDir, 'aether-icon-source.png');
 const png = path.join(buildDir, 'icon.png');
 const uiIcon = path.join(buildDir, 'gameagent-mascot-ui.png');
 const rendererUiIcon = path.join(

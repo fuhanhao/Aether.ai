@@ -1,7 +1,7 @@
 # Capability icon sources
 
 The inline monochrome brand glyphs used by `CapabilityIcon.tsx` were sourced
-from Simple Icons v16 and are bundled locally so the Noobi.ai capability
+from Simple Icons v16 and are bundled locally so the Aether.ai capability
 catalog works offline:
 
 - Unity

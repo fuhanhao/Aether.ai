@@ -1,61 +1,80 @@
 :root {
   color-scheme: dark;
-  --bg: #11120f;
-  --panel: #171814;
-  --panel-raised: #1d1e19;
-  --panel-soft: #20211c;
-  --line: #30312b;
-  --line-strong: #44463d;
-  --text: #ece9df;
-  --text-soft: #c3c1b7;
-  --muted: #85877d;
-  --faint: #5e6058;
-  --accent: #e6a53b;
-  --accent-soft: rgba(230, 165, 59, 0.12);
-  --accent-ink: #18130b;
-  --green: #8eb993;
-  --red: #d87868;
-  --blue: #83a7bd;
-  --icon-unity: #d6d6d6;
-  --icon-unreal: #72c0ed;
-  --icon-godot: #76b9ed;
-  --icon-blender: #e7ad7e;
-  --icon-playwright: #9bc59f;
-  --icon-web: #e6a53b;
-  --icon-steam: #83a7bd;
-  --icon-craft: #9bc59f;
-  --shadow: rgba(0, 0, 0, 0.3);
-  --sans: 'Avenir Next', 'DIN Alternate', 'Noto Sans SC', sans-serif;
-  --mono: 'SFMono-Regular', 'IBM Plex Mono', 'Noto Sans Mono CJK SC', monospace;
+  /* ── Aether.ai Holographic Sci-Fi Theme ── */
+  /* Base: deep space black */
+  --bg: #05060d;
+  --panel: #0a0c17;
+  --panel-raised: #0f1121;
+  --panel-soft: #141729;
+  /* Lines: holographic wireframe */
+  --line: #1a1d33;
+  --line-strong: #252a45;
+  /* Text: cool white-blue */
+  --text: #e0e4f5;
+  --text-soft: #a0a8c8;
+  --muted: #5e668c;
+  --faint: #3a4060;
+  /* Accent: holographic cyan */
+  --accent: #00e5ff;
+  --accent-soft: rgba(0, 229, 255, 0.10);
+  --accent-ink: #05060d;
+  /* Secondary accent: indigo */
+  --accent-secondary: #7c4dff;
+  --accent-secondary-soft: rgba(124, 77, 255, 0.10);
+  /* Semantic */
+  --green: #00e676;
+  --red: #ff5252;
+  --blue: #448aff;
+  /* Engine icons */
+  --icon-unity: #b0b8d0;
+  --icon-unreal: #64b5f6;
+  --icon-godot: #64b5f6;
+  --icon-blender: #ffab91;
+  --icon-playwright: #69f0ae;
+  --icon-web: #00e5ff;
+  --icon-steam: #448aff;
+  --icon-craft: #69f0ae;
+  /* Shadow: darker, deeper */
+  --shadow: rgba(0, 0, 0, 0.55);
+  /* Typography */
+  --sans: 'Inter', 'SF Pro Display', 'Noto Sans SC', sans-serif;
+  --mono: 'JetBrains Mono', 'SF Mono', 'Noto Sans Mono CJK SC', monospace;
+  /* Border radius */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
 }
 
 :root[data-theme='light'] {
-  color-scheme: light;
-  --bg: #e8e6df;
-  --panel: #f4f2eb;
-  --panel-raised: #fbf9f2;
-  --panel-soft: #e2e0d8;
-  --line: #cbc8bd;
-  --line-strong: #aaa79d;
-  --text: #20211d;
-  --text-soft: #45463f;
-  --muted: #73756c;
-  --faint: #97998f;
-  --accent: #b96d13;
-  --accent-soft: rgba(185, 109, 19, 0.1);
-  --accent-ink: #fff9ed;
-  --green: #557d5d;
-  --red: #b45243;
-  --blue: #52798f;
-  --icon-unity: #34352f;
-  --icon-unreal: #17638f;
-  --icon-godot: #2f6f9e;
-  --icon-blender: #9a4d18;
-  --icon-playwright: #3f742d;
-  --icon-web: #8a520f;
-  --icon-steam: #315c78;
-  --icon-craft: #3f742d;
-  --shadow: rgba(40, 40, 30, 0.14);
+  color-scheme: dark;
+  /* Light theme also uses sci-fi dark — Aether.ai is dark-first */
+  --bg: #080a14;
+  --panel: #0d0f1d;
+  --panel-raised: #121528;
+  --panel-soft: #161a30;
+  --line: #1e223d;
+  --line-strong: #2a3050;
+  --text: #e0e4f5;
+  --text-soft: #a0a8c8;
+  --muted: #5e668c;
+  --faint: #3a4060;
+  --accent: #00e5ff;
+  --accent-soft: rgba(0, 229, 255, 0.10);
+  --accent-ink: #05060d;
+  --accent-secondary: #7c4dff;
+  --accent-secondary-soft: rgba(124, 77, 255, 0.10);
+  --green: #00e676;
+  --red: #ff5252;
+  --blue: #448aff;
+  --icon-unity: #b0b8d0;
+  --icon-unreal: #64b5f6;
+  --icon-godot: #64b5f6;
+  --icon-blender: #ffab91;
+  --icon-playwright: #69f0ae;
+  --icon-web: #00e5ff;
+  --icon-steam: #448aff;
+  --icon-craft: #69f0ae;
+  --shadow: rgba(0, 0, 0, 0.55);
 }
 
 * {

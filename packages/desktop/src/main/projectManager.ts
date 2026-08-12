@@ -142,7 +142,7 @@ export class ProjectManager {
 
     const gameAgentDir = await this.ensureDirectoryInside(
       projectPath,
-      '.gameagent',
+      '.aetherai'
     );
     const projectMetadataPath = path.join(gameAgentDir, 'project.json');
     await this.assertSafeWritableFile(projectPath, projectMetadataPath);

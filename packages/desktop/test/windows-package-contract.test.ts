@@ -18,7 +18,7 @@ const iconBuildScript = readFileSync(
 
 describe('Windows x64 package contract', () => {
   it('保留产品身份并只配置 NSIS x64 目标', () => {
-    expect(desktopManifest.build.productName).toBe('Noobi.ai');
+    expect(desktopManifest.build.productName).toBe('Aether.ai');
     expect(desktopManifest.build.appId).toBe('com.gameagent.desktop');
     expect(desktopManifest.build.win).toMatchObject({
       icon: 'build/icon.png',
@@ -33,7 +33,7 @@ describe('Windows x64 package contract', () => {
 
   it('使用 assisted current-user 安装并保留用户数据', () => {
     expect(desktopManifest.build.nsis).toMatchObject({
-      artifactName: 'Noobi.ai-${version}-windows-${arch}-setup.${ext}',
+      artifactName: 'Aether.ai-${version}-windows-${arch}-setup.${ext}',
       oneClick: false,
       perMachine: false,
       selectPerMachineByDefault: false,
@@ -41,7 +41,7 @@ describe('Windows x64 package contract', () => {
       allowToChangeInstallationDirectory: true,
       createDesktopShortcut: 'always',
       createStartMenuShortcut: true,
-      shortcutName: 'Noobi.ai',
+      shortcutName: 'Aether.ai',
       deleteAppDataOnUninstall: false,
       packElevateHelper: false,
     });

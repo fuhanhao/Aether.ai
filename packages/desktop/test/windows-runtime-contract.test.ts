@@ -15,8 +15,8 @@ describe('Windows desktop runtime contract', () => {
   it('provides a packaged renderer and secure-storage smoke signal', async () => {
     const source = await readFile('src/main/main.ts', 'utf8');
 
-    expect(source).toContain("process.argv.includes('--noobi-smoke-test')");
+    expect(source).toContain("process.argv.includes('--aether-smoke-test')");
     expect(source).toContain('safeStorage.isEncryptionAvailable()');
-    expect(source).toContain('NOOBI_PACKAGED_SMOKE_READY');
+    expect(source).toContain('AETHER_PACKAGED_SMOKE_READY');
   });
 });

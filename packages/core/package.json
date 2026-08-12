@@ -1,10 +1,10 @@
 {
   "name": "@opengame/opengame-core",
   "version": "0.6.0",
-  "description": "Noobi.ai core: agent runtime, tools, and game-production primitives.",
+  "description": "Aether.ai core: agent runtime, tools, and game-production primitives.",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Innate-Labs/Noobi.ai.git"
+    "url": "git+https://github.com/Innate-Labs/Aether.ai.git"
   },
   "type": "module",
   "main": "dist/index.js",

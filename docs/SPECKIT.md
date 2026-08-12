@@ -1,9 +1,9 @@
-# Noobi.ai 的 Spec Kit 开发流程
+# Aether.ai 的 Spec Kit 开发流程
 
-Noobi.ai 使用仓库内已签入的 Spec Kit 资产管理功能开发。初始化记录位于
+Aether.ai 使用仓库内已签入的 Spec Kit 资产管理功能开发。初始化记录位于
 `.specify/init-options.json`，Codex 工作流位于 `.agents/skills/speckit-*/SKILL.md`。
 
-这里的 Spec Kit 用于**开发 Noobi.ai 本身**。它不会自动成为 Noobi.ai 客户端内
+这里的 Spec Kit 用于**开发 Aether.ai 本身**。它不会自动成为 Aether.ai 客户端内
 Agent 的插件，也不会让客户端自动加载 `.agents/skills`；客户端插件仍由 Skills
 与 MCP 管理界面控制。
 
@@ -39,7 +39,7 @@ $speckit-specify 新增三个 React 组件和两个 IPC handler
 所有 feature 的 spec、plan 和 tasks 都必须遵守
 [`constitution.md`](../.specify/memory/constitution.md)。其中包括：
 
-- 新增产品文案只使用 Noobi.ai，并区分内置能力与外部 Skill / MCP 能力。
+- 新增产品文案只使用 Aether.ai，并区分内置能力与外部 Skill / MCP 能力。
 - Renderer 不直接访问 Node、文件、进程或凭据。
 - Agent 工作可观察、可停止、可恢复，并按当前单任务调度模型描述。
 - IPC、持久化、凭据、插件和打包改动必须提供与风险匹配的验证证据。

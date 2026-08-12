@@ -18,7 +18,7 @@ export function inspectDesktopPlatform(
   if (platform !== 'win32') {
     return {
       supported: false,
-      message: 'Noobi.ai 当前客户端仅支持 macOS 与 Windows 11 x64。',
+      message: 'Aether.ai 当前客户端仅支持 macOS 与 Windows 11 x64。',
     };
   }
   const nativeArchitecture = windowsNativeArchitecture(environment);
@@ -29,14 +29,14 @@ export function inspectDesktopPlatform(
   ) {
     return {
       supported: false,
-      message: 'Noobi.ai 当前 Windows 版本只支持 x64 架构。',
+      message: 'Aether.ai 当前 Windows 版本只支持 x64 架构。',
     };
   }
   const build = Number(systemRelease.split('.')[2]);
   if (!Number.isInteger(build) || build < WINDOWS_11_MINIMUM_BUILD) {
     return {
       supported: false,
-      message: 'Noobi.ai 当前 Windows 版本需要 Windows 11 x64。',
+      message: 'Aether.ai 当前 Windows 版本需要 Windows 11 x64。',
     };
   }
   return { supported: true };

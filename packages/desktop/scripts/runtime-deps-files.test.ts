@@ -125,15 +125,15 @@ describe('Runtime dependency filesystem contract', () => {
   it('uses Windows path semantics when checking staging containment', () => {
     expect(
       isPathInside(
-        String.raw`D:\a\Noobi.ai\.runtime-deps\node_modules`,
-        String.raw`D:\a\Noobi.ai\.runtime-deps\node_modules\tiktoken\tiktoken.cjs`,
+        String.raw`D:\a\Aether.ai\.runtime-deps\node_modules`,
+        String.raw`D:\a\Aether.ai\.runtime-deps\node_modules\tiktoken\tiktoken.cjs`,
         path.win32,
       ),
     ).toBe(true);
     expect(
       isPathInside(
-        String.raw`D:\a\Noobi.ai\.runtime-deps\node_modules`,
-        String.raw`D:\a\Noobi.ai\node_modules\tiktoken\tiktoken.cjs`,
+        String.raw`D:\a\Aether.ai\.runtime-deps\node_modules`,
+        String.raw`D:\a\Aether.ai\node_modules\tiktoken\tiktoken.cjs`,
         path.win32,
       ),
     ).toBe(false);

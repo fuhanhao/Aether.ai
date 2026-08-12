@@ -22,7 +22,7 @@ describe('Windows 安装包验证 helper', () => {
     expect(inspectPortableExecutable(x64).machineName).toBe('amd64');
     expect(assertAmd64PortableExecutable(x64).machine).toBe(PE_MACHINE.AMD64);
     expect(() =>
-      assertAmd64PortableExecutable(createPe(PE_MACHINE.I386), 'Noobi.ai.exe'),
+      assertAmd64PortableExecutable(createPe(PE_MACHINE.I386), 'Aether.ai.exe'),
     ).toThrow(/不是 Windows x64 PE/);
   });
 
@@ -83,47 +83,47 @@ describe('Windows 安装包验证 helper', () => {
   it('验证产品版本资源与 electron-builder 身份', () => {
     expect(
       assertWindowsVersionInfo(
-        { ProductName: 'Noobi.ai', ProductVersion: '0.2.2.0' },
-        { productName: 'Noobi.ai', version: '0.2.2' },
+        { ProductName: 'Aether.ai', ProductVersion: '0.2.2.0' },
+        { productName: 'Aether.ai', version: '0.2.2' },
       ),
     ).toBeTruthy();
     expect(() =>
       assertWindowsVersionInfo(
-        { ProductName: 'Noobi', ProductVersion: '0.2.2' },
-        { productName: 'Noobi.ai', version: '0.2.2' },
+        { ProductName: 'Aether', ProductVersion: '0.2.2' },
+        { productName: 'Aether.ai', version: '0.2.2' },
       ),
     ).toThrow(/ProductName/);
     expect(
       assertBuilderIdentity(
-        'appId: com.gameagent.desktop\nproductName: Noobi.ai\n',
-        { appId: 'com.gameagent.desktop', productName: 'Noobi.ai' },
+        'appId: com.gameagent.desktop\nproductName: Aether.ai\n',
+        { appId: 'com.gameagent.desktop', productName: 'Aether.ai' },
       ).appId,
     ).toBe('com.gameagent.desktop');
     expect(
       assertBuilderIdentity(
-        { appId: 'com.gameagent.desktop', productName: 'Noobi.ai' },
-        { appId: 'com.gameagent.desktop', productName: 'Noobi.ai' },
+        { appId: 'com.gameagent.desktop', productName: 'Aether.ai' },
+        { appId: 'com.gameagent.desktop', productName: 'Aether.ai' },
       ).productName,
-    ).toBe('Noobi.ai');
+    ).toBe('Aether.ai');
   });
 
   it('生成稳定的 Windows x64 setup 文件名', () => {
-    expect(expectedWindowsArtifactName('Noobi.ai', '0.2.2')).toBe(
-      'Noobi.ai-0.2.2-windows-x64-setup.exe',
+    expect(expectedWindowsArtifactName('Aether.ai', '0.2.2')).toBe(
+      'Aether.ai-0.2.2-windows-x64-setup.exe',
     );
   });
 
   it('生成 current-user silent NSIS 参数并保证 /D 位于最后', () => {
     const args = createNsisInstallArguments(
-      'C:\\Users\\Test User\\AppData\\Local\\Temp\\Noobi install',
+      'C:\\Users\\Test User\\AppData\\Local\\Temp\\Aether install',
     );
     expect(args).toEqual([
       '/currentuser',
       '/S',
-      '/D=C:\\Users\\Test User\\AppData\\Local\\Temp\\Noobi install',
+      '/D=C:\\Users\\Test User\\AppData\\Local\\Temp\\Aether install',
     ]);
     expect(args.at(-1)).toMatch(/^\/D=/);
-    expect(() => createNsisInstallArguments('relative\\Noobi')).toThrow(
+    expect(() => createNsisInstallArguments('relative\\Aether')).toThrow(
       /绝对 Windows 路径/,
     );
   });
