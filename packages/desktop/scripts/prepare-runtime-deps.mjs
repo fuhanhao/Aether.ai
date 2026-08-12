@@ -181,7 +181,7 @@ copiedPackages.sort((left, right) =>
 skippedPackages.sort((left, right) => left.name.localeCompare(right.name));
 
 const runtimePackageJson = {
-  name: '@gameagent/desktop-runtime',
+  name: '@aetherai/desktop-runtime',
   version: '0.0.0',
   private: true,
   type: 'module',

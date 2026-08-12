@@ -33,10 +33,10 @@
 
 ## 下载客户端
 
-| 平台                    | 下载                                                                                                                             | 状态                                                                      |
-| ----------------------- | -------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------- |
+| 平台                    | 下载                                                                                                                               | 状态                                                                      |
+| ----------------------- | ---------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------- |
 | **Windows 11 x64**      | **[下载 Aether.ai v0.2.2 Windows 候选版](https://github.com/Innate-Labs/Aether.ai/actions/runs/31561503301/artifacts/9127999575)** | 未签名开发候选版；已通过 Windows x64 原生 CI 的构建、启动、安装和卸载验证 |
-| **macOS Apple Silicon** | [前往 GitHub Releases](https://github.com/Innate-Labs/Aether.ai/releases)                                                         | 当前发行基线；正式安装包以 Releases 页面为准                              |
+| **macOS Apple Silicon** | [前往 GitHub Releases](https://github.com/Innate-Labs/Aether.ai/releases)                                                          | 当前发行基线；正式安装包以 Releases 页面为准                              |
 
 Windows 下载内容为 `Aether.ai-windows-x64-unsigned-dev` ZIP，解压后包含
 `Aether.ai-0.2.2-windows-x64-setup.exe` 和对应的 `.sha256` 校验文件。GitHub Actions Artifact
@@ -52,7 +52,7 @@ Windows 下载内容为 `Aether.ai-windows-x64-unsigned-dev` ZIP，解压后包�
 
 Aether.ai 把这些环节组织成一条可观察、可停止、可恢复的本地制作流程：
 
-| 传统痛点                         | Aether.ai 的处理方式                                                  |
+| 传统痛点                         | Aether.ai 的处理方式                                                 |
 | -------------------------------- | -------------------------------------------------------------------- |
 | 创意散落在聊天、文档和多个工具里 | 以本地项目为中心保存 Prompt、GDD、代码、素材与构建结果               |
 | Agent 工作像黑盒，出错后难定位   | 展示制作阶段、实时事件、Function Calling、文件变化与错误             |
@@ -303,7 +303,7 @@ npm run desktop:package:app
 npm run desktop:build
 
 # 桌面端测试
-npm test --workspace=@gameagent/desktop
+npm test --workspace=@aetherai/desktop
 
 # 全仓类型检查
 npm run typecheck

@@ -3,18 +3,18 @@
 ## Windows 11 x64 开发构建
 
 ```powershell
-git clone https://github.com/Innate-Labs/Noobi.ai.git
-Set-Location Noobi.ai
+git clone https://github.com/fuhanhao/Aether.ai.git
+Set-Location Aether.ai
 npm ci
-npm run typecheck --workspace=@gameagent/desktop
-npm test --workspace=@gameagent/desktop
-npm run package:win --workspace=@gameagent/desktop
+npm run typecheck --workspace=@aetherai/desktop
+npm test --workspace=@aetherai/desktop
+npm run package:win --workspace=@aetherai/desktop
 ```
 
 预期安装包：
 
 ```text
-packages/desktop/release/Noobi.ai-0.2.2-windows-x64-setup.exe
+packages/desktop/release/Aether.ai-0.2.2-windows-x64-setup.exe
 ```
 
 普通命令生成的是开发构建。它可以用于内部验证，但没有有效 Authenticode 时不得作为公开正式版。
@@ -22,15 +22,15 @@ packages/desktop/release/Noobi.ai-0.2.2-windows-x64-setup.exe
 ## 验证安装包
 
 ```powershell
-npm run verify:win-installer --workspace=@gameagent/desktop
-Get-FileHash packages/desktop/release/Noobi.ai-0.2.2-windows-x64-setup.exe -Algorithm SHA256
-Get-AuthenticodeSignature packages/desktop/release/Noobi.ai-0.2.2-windows-x64-setup.exe
+npm run verify:win-installer --workspace=@aetherai/desktop
+Get-FileHash packages/desktop/release/Aether.ai-0.2.2-windows-x64-setup.exe -Algorithm SHA256
+Get-AuthenticodeSignature packages/desktop/release/Aether.ai-0.2.2-windows-x64-setup.exe
 ```
 
 正式签名构建使用 CI Secret 提供证书，再执行：
 
 ```powershell
-npm run package:win:signed --workspace=@gameagent/desktop
+npm run package:win:signed --workspace=@aetherai/desktop
 ```
 
 ## 干净机器验收
@@ -49,10 +49,10 @@ npm run package:win:signed --workspace=@gameagent/desktop
 ## macOS 回归
 
 ```bash
-npm run typecheck --workspace=@gameagent/desktop
-npm test --workspace=@gameagent/desktop
-npm run build --workspace=@gameagent/desktop
-npm run smoke:runtime --workspace=@gameagent/desktop
+npm run typecheck --workspace=@aetherai/desktop
+npm test --workspace=@aetherai/desktop
+npm run build --workspace=@aetherai/desktop
+npm run smoke:runtime --workspace=@aetherai/desktop
 ```
 
 Windows 产物只能在 Windows Runner 的验证结果通过后标记为可用。

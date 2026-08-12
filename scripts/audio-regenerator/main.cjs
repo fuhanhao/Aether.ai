@@ -2,14 +2,14 @@ const { app } = require('electron');
 const os = require('node:os');
 const path = require('node:path');
 
-app.setName('@gameagent/desktop');
+app.setName('@aetherai/desktop');
 app.setPath(
   'userData',
   path.join(
     os.homedir(),
     'Library',
     'Application Support',
-    '@gameagent',
+    '@aetherai',
     'desktop',
   ),
 );

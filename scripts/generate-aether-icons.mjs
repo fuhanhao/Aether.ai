@@ -9,7 +9,12 @@ import { mkdir } from 'node:fs/promises';
 import path from 'node:path';
 import sharp from 'sharp';
 
-const DESKTOP_ROOT = path.resolve(import.meta.dirname, '..', 'packages', 'desktop');
+const DESKTOP_ROOT = path.resolve(
+  import.meta.dirname,
+  '..',
+  'packages',
+  'desktop',
+);
 const BUILD_DIR = path.join(DESKTOP_ROOT, 'build');
 const ASSETS_DIR = path.join(DESKTOP_ROOT, 'src', 'renderer', 'assets');
 const DOCS_IMAGES = path.resolve(import.meta.dirname, '..', 'docs', 'images');
@@ -100,25 +105,25 @@ const svg = `<?xml version="1.0" encoding="UTF-8"?>
   <!-- ═══ MAIN GEOMETRIC STRUCTURE ═══ -->
 
   <!-- Outer hexagon (large, thin, cyan) -->
-  <polygon points="${C},${C-340} ${C+294},${C-170} ${C+294},${C+170} ${C},${C+340} ${C-294},${C+170} ${C-294},${C-170}"
+  <polygon points="${C},${C - 340} ${C + 294},${C - 170} ${C + 294},${C + 170} ${C},${C + 340} ${C - 294},${C + 170} ${C - 294},${C - 170}"
            fill="none" stroke="url(#cyanGrad)" stroke-width="2.5" filter="url(#glow)" opacity="0.7" />
 
   <!-- Middle hexagon (rotated 30°, slightly smaller, indigo) -->
-  <polygon points="${C},${C-260} ${C+225},${C-130} ${C+225},${C+130} ${C},${C+260} ${C-225},${C+130} ${C-225},${C-130}"
+  <polygon points="${C},${C - 260} ${C + 225},${C - 130} ${C + 225},${C + 130} ${C},${C + 260} ${C - 225},${C + 130} ${C - 225},${C - 130}"
            fill="none" stroke="url(#indigoGrad)" stroke-width="1.8" filter="url(#softGlow)" opacity="0.5"
            transform="rotate(30 ${C} ${C})" />
 
   <!-- Inner diamond (rotated 45°) -->
-  <rect x="${C-140}" y="${C-140}" width="280" height="280" rx="2"
+  <rect x="${C - 140}" y="${C - 140}" width="280" height="280" rx="2"
         fill="none" stroke="url(#cyanGrad)" stroke-width="2" filter="url(#glow)" opacity="0.6"
         transform="rotate(45 ${C} ${C})" />
 
   <!-- Inner hexagon (small) -->
-  <polygon points="${C},${C-160} ${C+139},${C-80} ${C+139},${C+80} ${C},${C+160} ${C-139},${C+80} ${C-139},${C-80}"
+  <polygon points="${C},${C - 160} ${C + 139},${C - 80} ${C + 139},${C + 80} ${C},${C + 160} ${C - 139},${C + 80} ${C - 139},${C - 80}"
            fill="none" stroke="url(#indigoGrad)" stroke-width="2.2" filter="url(#glow)" opacity="0.8" />
 
   <!-- Core diamond (small, bright cyan) -->
-  <rect x="${C-60}" y="${C-60}" width="120" height="120" rx="1"
+  <rect x="${C - 60}" y="${C - 60}" width="120" height="120" rx="1"
         fill="none" stroke="url(#cyanGrad)" stroke-width="2.5" filter="url(#glow)" opacity="0.9"
         transform="rotate(45 ${C} ${C})" />
 
@@ -129,40 +134,40 @@ const svg = `<?xml version="1.0" encoding="UTF-8"?>
   <!-- ═══ CORNER ACCENT LINES (thin holographic) ═══ -->
 
   <!-- Top-left accent -->
-  <line x1="${C-340}" y1="${C-280}" x2="${C-340}" y2="${C-200}"
+  <line x1="${C - 340}" y1="${C - 280}" x2="${C - 340}" y2="${C - 200}"
         stroke="#00e5ff" stroke-width="1.5" filter="url(#softGlow)" opacity="0.35" />
-  <line x1="${C-280}" y1="${C-340}" x2="${C-200}" y2="${C-340}"
+  <line x1="${C - 280}" y1="${C - 340}" x2="${C - 200}" y2="${C - 340}"
         stroke="#00e5ff" stroke-width="1.5" filter="url(#softGlow)" opacity="0.35" />
 
   <!-- Top-right accent -->
-  <line x1="${C+340}" y1="${C-280}" x2="${C+340}" y2="${C-200}"
+  <line x1="${C + 340}" y1="${C - 280}" x2="${C + 340}" y2="${C - 200}"
         stroke="#7c4dff" stroke-width="1.5" filter="url(#softGlow)" opacity="0.35" />
-  <line x1="${C+280}" y1="${C-340}" x2="${C+200}" y2="${C-340}"
+  <line x1="${C + 280}" y1="${C - 340}" x2="${C + 200}" y2="${C - 340}"
         stroke="#7c4dff" stroke-width="1.5" filter="url(#softGlow)" opacity="0.35" />
 
   <!-- Bottom-left accent -->
-  <line x1="${C-340}" y1="${C+280}" x2="${C-340}" y2="${C+200}"
+  <line x1="${C - 340}" y1="${C + 280}" x2="${C - 340}" y2="${C + 200}"
         stroke="#7c4dff" stroke-width="1.5" filter="url(#softGlow)" opacity="0.35" />
 
   <!-- Bottom-right accent -->
-  <line x1="${C+340}" y1="${C+280}" x2="${C+340}" y2="${C+200}"
+  <line x1="${C + 340}" y1="${C + 280}" x2="${C + 340}" y2="${C + 200}"
         stroke="#00e5ff" stroke-width="1.5" filter="url(#softGlow)" opacity="0.35" />
 
   <!-- ═══ ORBIT RING ACCENTS ═══ -->
   <!-- Small orbit dots on outer hexagon vertices -->
-  <circle cx="${C}" cy="${C-340}" r="5" fill="#00e5ff" filter="url(#glow)" opacity="0.7" />
-  <circle cx="${C+294}" cy="${C-170}" r="4" fill="#00b8d4" filter="url(#glow)" opacity="0.5" />
-  <circle cx="${C+294}" cy="${C+170}" r="4" fill="#0091ea" filter="url(#glow)" opacity="0.5" />
-  <circle cx="${C}" cy="${C+340}" r="5" fill="#7c4dff" filter="url(#glow)" opacity="0.7" />
-  <circle cx="${C-294}" cy="${C+170}" r="4" fill="#651fff" filter="url(#glow)" opacity="0.5" />
-  <circle cx="${C-294}" cy="${C-170}" r="4" fill="#304ffe" filter="url(#glow)" opacity="0.5" />
+  <circle cx="${C}" cy="${C - 340}" r="5" fill="#00e5ff" filter="url(#glow)" opacity="0.7" />
+  <circle cx="${C + 294}" cy="${C - 170}" r="4" fill="#00b8d4" filter="url(#glow)" opacity="0.5" />
+  <circle cx="${C + 294}" cy="${C + 170}" r="4" fill="#0091ea" filter="url(#glow)" opacity="0.5" />
+  <circle cx="${C}" cy="${C + 340}" r="5" fill="#7c4dff" filter="url(#glow)" opacity="0.7" />
+  <circle cx="${C - 294}" cy="${C + 170}" r="4" fill="#651fff" filter="url(#glow)" opacity="0.5" />
+  <circle cx="${C - 294}" cy="${C - 170}" r="4" fill="#304ffe" filter="url(#glow)" opacity="0.5" />
 
   <!-- ═══ CONNECTING LINES (cross-hexagon) ═══ -->
-  <line x1="${C}" y1="${C-160}" x2="${C+139}" y2="${C+80}"
+  <line x1="${C}" y1="${C - 160}" x2="${C + 139}" y2="${C + 80}"
         stroke="#00e5ff" stroke-width="0.8" opacity="0.2" />
-  <line x1="${C+139}" y1="${C+80}" x2="${C-139}" y2="${C+80}"
+  <line x1="${C + 139}" y1="${C + 80}" x2="${C - 139}" y2="${C + 80}"
         stroke="#7c4dff" stroke-width="0.8" opacity="0.2" />
-  <line x1="${C-139}" y1="${C+80}" x2="${C}" y2="${C-160}"
+  <line x1="${C - 139}" y1="${C + 80}" x2="${C}" y2="${C - 160}"
         stroke="#00b8d4" stroke-width="0.8" opacity="0.2" />
 </svg>`;
 

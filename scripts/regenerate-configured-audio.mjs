@@ -23,7 +23,7 @@ const statePath =
     os.homedir(),
     'Library',
     'Application Support',
-    '@gameagent',
+    '@aetherai',
     'desktop',
     'state.json',
   );

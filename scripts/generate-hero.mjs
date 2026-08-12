@@ -127,11 +127,11 @@ const svg = `<?xml version="1.0" encoding="UTF-8"?>
   <!-- ═══ GEOMETRIC STRUCTURE ═══ -->
 
   <!-- Large hexagon (faint, background) -->
-  <polygon points="${CX},${CY-380} ${CX+329},${CY-190} ${CX+329},${CY+190} ${CX},${CY+380} ${CX-329},${CY+190} ${CX-329},${CY-190}"
+  <polygon points="${CX},${CY - 380} ${CX + 329},${CY - 190} ${CX + 329},${CY + 190} ${CX},${CY + 380} ${CX - 329},${CY + 190} ${CX - 329},${CY - 190}"
            fill="none" stroke="url(#cyanGrad)" stroke-width="1.5" opacity="0.12" />
 
   <!-- Medium hexagon (rotated 30°) -->
-  <polygon points="${CX},${CY-280} ${CX+242},${CY-140} ${CX+242},${CY+140} ${CX},${CY+280} ${CX-242},${CY+140} ${CX-242},${CY-140}"
+  <polygon points="${CX},${CY - 280} ${CX + 242},${CY - 140} ${CX + 242},${CY + 140} ${CX},${CY + 280} ${CX - 242},${CY + 140} ${CX - 242},${CY - 140}"
            fill="none" stroke="url(#indigoGrad)" stroke-width="1.2" opacity="0.15"
            transform="rotate(30 ${CX} ${CY})" />
 
@@ -154,16 +154,16 @@ const svg = `<?xml version="1.0" encoding="UTF-8"?>
 
   <!-- Central geometric logo on panel -->
   <!-- Outer hex -->
-  <polygon points="${CX},${CY-120} ${CX+104},${CY-60} ${CX+104},${CY+60} ${CX},${CY+120} ${CX-104},${CY+60} ${CX-104},${CY-60}"
+  <polygon points="${CX},${CY - 120} ${CX + 104},${CY - 60} ${CX + 104},${CY + 60} ${CX},${CY + 120} ${CX - 104},${CY + 60} ${CX - 104},${CY - 60}"
            fill="none" stroke="url(#cyanGrad)" stroke-width="1.8" filter="url(#glow)" opacity="0.7" />
 
   <!-- Inner diamond -->
-  <rect x="${CX-62}" y="${CY-62}" width="124" height="124" rx="1"
+  <rect x="${CX - 62}" y="${CY - 62}" width="124" height="124" rx="1"
         fill="none" stroke="url(#indigoGrad)" stroke-width="1.5" filter="url(#softGlow)" opacity="0.6"
         transform="rotate(45 ${CX} ${CY})" />
 
   <!-- Core diamond -->
-  <rect x="${CX-32}" y="${CY-32}" width="64" height="64" rx="1"
+  <rect x="${CX - 32}" y="${CY - 32}" width="64" height="64" rx="1"
         fill="none" stroke="url(#cyanGrad)" stroke-width="2" filter="url(#glow)" opacity="0.85"
         transform="rotate(45 ${CX} ${CY})" />
 
@@ -172,12 +172,12 @@ const svg = `<?xml version="1.0" encoding="UTF-8"?>
   <circle cx="${CX}" cy="${CY}" r="2" fill="#fff" opacity="0.7" />
 
   <!-- Hexagon vertex orbit dots -->
-  <circle cx="${CX}" cy="${CY-120}" r="3.5" fill="#00e5ff" filter="url(#glow)" opacity="0.6" />
-  <circle cx="${CX+104}" cy="${CY-60}" r="2.5" fill="#00b8d4" filter="url(#softGlow)" opacity="0.45" />
-  <circle cx="${CX+104}" cy="${CY+60}" r="2.5" fill="#0091ea" filter="url(#softGlow)" opacity="0.45" />
-  <circle cx="${CX}" cy="${CY+120}" r="3.5" fill="#7c4dff" filter="url(#glow)" opacity="0.6" />
-  <circle cx="${CX-104}" cy="${CY+60}" r="2.5" fill="#651fff" filter="url(#softGlow)" opacity="0.45" />
-  <circle cx="${CX-104}" cy="${CY-60}" r="2.5" fill="#304ffe" filter="url(#softGlow)" opacity="0.45" />
+  <circle cx="${CX}" cy="${CY - 120}" r="3.5" fill="#00e5ff" filter="url(#glow)" opacity="0.6" />
+  <circle cx="${CX + 104}" cy="${CY - 60}" r="2.5" fill="#00b8d4" filter="url(#softGlow)" opacity="0.45" />
+  <circle cx="${CX + 104}" cy="${CY + 60}" r="2.5" fill="#0091ea" filter="url(#softGlow)" opacity="0.45" />
+  <circle cx="${CX}" cy="${CY + 120}" r="3.5" fill="#7c4dff" filter="url(#glow)" opacity="0.6" />
+  <circle cx="${CX - 104}" cy="${CY + 60}" r="2.5" fill="#651fff" filter="url(#softGlow)" opacity="0.45" />
+  <circle cx="${CX - 104}" cy="${CY - 60}" r="2.5" fill="#304ffe" filter="url(#softGlow)" opacity="0.45" />
 
   <!-- ═══ INFO LINE DECORATIONS ═══ -->
 
@@ -190,32 +190,32 @@ const svg = `<?xml version="1.0" encoding="UTF-8"?>
   <circle cx="${CX}" cy="${CY - 160}" r="2" fill="#00e5ff" opacity="0.3" />
 
   <!-- Branch lines from center to hexagon vertices -->
-  <line x1="${CX}" y1="${CY}" x2="${CX}" y2="${CY-120}" stroke="#00e5ff" stroke-width="0.5" opacity="0.12" />
-  <line x1="${CX}" y1="${CY}" x2="${CX+104}" y2="${CY-60}" stroke="#00b8d4" stroke-width="0.5" opacity="0.12" />
-  <line x1="${CX}" y1="${CY}" x2="${CX+104}" y2="${CY+60}" stroke="#0091ea" stroke-width="0.5" opacity="0.12" />
-  <line x1="${CX}" y1="${CY}" x2="${CX}" y2="${CY+120}" stroke="#7c4dff" stroke-width="0.5" opacity="0.12" />
-  <line x1="${CX}" y1="${CY}" x2="${CX-104}" y2="${CY+60}" stroke="#651fff" stroke-width="0.5" opacity="0.12" />
-  <line x1="${CX}" y1="${CY}" x2="${CX-104}" y2="${CY-60}" stroke="#304ffe" stroke-width="0.5" opacity="0.12" />
+  <line x1="${CX}" y1="${CY}" x2="${CX}" y2="${CY - 120}" stroke="#00e5ff" stroke-width="0.5" opacity="0.12" />
+  <line x1="${CX}" y1="${CY}" x2="${CX + 104}" y2="${CY - 60}" stroke="#00b8d4" stroke-width="0.5" opacity="0.12" />
+  <line x1="${CX}" y1="${CY}" x2="${CX + 104}" y2="${CY + 60}" stroke="#0091ea" stroke-width="0.5" opacity="0.12" />
+  <line x1="${CX}" y1="${CY}" x2="${CX}" y2="${CY + 120}" stroke="#7c4dff" stroke-width="0.5" opacity="0.12" />
+  <line x1="${CX}" y1="${CY}" x2="${CX - 104}" y2="${CY + 60}" stroke="#651fff" stroke-width="0.5" opacity="0.12" />
+  <line x1="${CX}" y1="${CY}" x2="${CX - 104}" y2="${CY - 60}" stroke="#304ffe" stroke-width="0.5" opacity="0.12" />
 
   <!-- ═══ FLOATING GEOMETRIC ELEMENTS ═══ -->
 
   <!-- Left floating mini hex -->
-  <polygon points="${CX-580},${CY-80} ${CX-540},${CY-60} ${CX-540},${CY-20} ${CX-580},${CY-0} ${CX-620},${CY-20} ${CX-620},${CY-60}"
+  <polygon points="${CX - 580},${CY - 80} ${CX - 540},${CY - 60} ${CX - 540},${CY - 20} ${CX - 580},${CY - 0} ${CX - 620},${CY - 20} ${CX - 620},${CY - 60}"
            fill="none" stroke="#00e5ff" stroke-width="1" opacity="0.15" filter="url(#softGlow)" />
 
   <!-- Right floating mini hex -->
-  <polygon points="${CX+540},${CY-30} ${CX+580},${CY-10} ${CX+580},${CY+30} ${CX+540},${CY+50} ${CX+500},${CY+30} ${CX+500},${CY-10}"
+  <polygon points="${CX + 540},${CY - 30} ${CX + 580},${CY - 10} ${CX + 580},${CY + 30} ${CX + 540},${CY + 50} ${CX + 500},${CY + 30} ${CX + 500},${CY - 10}"
            fill="none" stroke="#7c4dff" stroke-width="1" opacity="0.15" filter="url(#softGlow)" />
 
   <!-- Left diamond -->
   <rect x="${CX - 610}" y="${CY + 40}" width="40" height="40" rx="1"
         fill="none" stroke="#7c4dff" stroke-width="0.8" opacity="0.12"
-        transform="rotate(45 ${CX-590} ${CY+60})" />
+        transform="rotate(45 ${CX - 590} ${CY + 60})" />
 
   <!-- Right diamond -->
   <rect x="${CX + 570}" y="${CY - 90}" width="35" height="35" rx="1"
         fill="none" stroke="#00e5ff" stroke-width="0.8" opacity="0.12"
-        transform="rotate(45 ${CX+587} ${CY-72})" />
+        transform="rotate(45 ${CX + 587} ${CY - 72})" />
 
   <!-- ═══ DECORATIVE FRAME LINES ═══ -->
   <line x1="100" y1="300" x2="400" y2="300" stroke="url(#lineH)" stroke-width="0.8" opacity="0.12" />

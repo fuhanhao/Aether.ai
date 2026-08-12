@@ -43,7 +43,7 @@ const manifest = JSON.parse(
   await readFile(path.join(desktopRoot, 'package.json'), 'utf8'),
 );
 const requireSignature = process.argv.includes('--require-signature');
-const expectedPublisher = process.env.NOOBI_WINDOWS_SIGNER || 'Innate Labs';
+const expectedPublisher = process.env.AETHER_WINDOWS_SIGNER || 'Innate Labs';
 const installSmoke = process.argv.includes('--install-smoke');
 const positionalArguments = process.argv
   .slice(2)
