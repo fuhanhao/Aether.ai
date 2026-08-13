@@ -15,7 +15,7 @@ jobs:
       enabled: '${{ steps.check.outputs.enabled }}'
     steps:
       - name: 'Check if API key is configured'
-        id: check
+        id: 'check'
         env:
           OPENAI_API_KEY: '${{ secrets.OPENAI_API_KEY }}'
         run: |-
