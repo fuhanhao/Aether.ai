@@ -142,7 +142,7 @@ describe('Runtime dependency filesystem contract', () => {
 
 async function createFixtureRoot() {
   const directory = await mkdtemp(
-    path.join(os.tmpdir(), 'noobi-runtime-files-test-'),
+    path.join(os.tmpdir(), 'aether-runtime-files-test-'),
   );
   temporaryDirectories.push(directory);
   return directory;

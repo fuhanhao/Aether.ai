@@ -16,7 +16,7 @@ export function resolvePackageScript(platform, arch) {
     return 'package:win';
   }
   throw new Error(
-    `Noobi.ai 不支持在 ${platform}/${arch} 宿主上生成桌面安装包。` +
+    `Aether.ai 不支持在 ${platform}/${arch} 宿主上生成桌面安装包。` +
       '支持的宿主为 macOS arm64/x64 与 Windows x64。',
   );
 }

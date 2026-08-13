@@ -27,10 +27,10 @@ const manifest = JSON.parse(
 const releaseDirectory = path.join(desktopRoot, 'release');
 const defaultDmg = path.join(
   releaseDirectory,
-  `Noobi.ai-${manifest.version}-${process.arch}.dmg`,
+  `Aether.ai-${manifest.version}-${process.arch}.dmg`,
 );
 const dmgPath = path.resolve(process.argv[2] || defaultDmg);
-const mountPoint = await mkdtemp(path.join(os.tmpdir(), 'noobi-dmg-verify-'));
+const mountPoint = await mkdtemp(path.join(os.tmpdir(), 'aether-dmg-verify-'));
 const appName = `${manifest.build.productName}.app`;
 let mounted = false;
 

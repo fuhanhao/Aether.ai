@@ -23,7 +23,7 @@ export const REQUIRED_WINDOWS_RESOURCES = Object.freeze([
 export const AUTHENTICODE_POWERSHELL_SCRIPT = String.raw`
 $securityModule = Join-Path $PSHOME 'Modules\Microsoft.PowerShell.Security\Microsoft.PowerShell.Security.psd1'
 Import-Module -Name $securityModule -Force -ErrorAction Stop
-$signature = Microsoft.PowerShell.Security\Get-AuthenticodeSignature -LiteralPath $env:NOOBI_VERIFY_FILE
+$signature = Microsoft.PowerShell.Security\Get-AuthenticodeSignature -LiteralPath $env:AETHER_VERIFY_FILE
 [ordered]@{
   Status = [string]$signature.Status
   StatusMessage = [string]$signature.StatusMessage

@@ -240,7 +240,7 @@ function assertNativeRuntimeTarget(platform, arch) {
     );
   }
   if (platform === 'win32' && arch !== 'x64') {
-    throw new Error('Noobi.ai Windows Runtime 仅支持 win32/x64。');
+    throw new Error('Aether.ai Windows Runtime 仅支持 win32/x64。');
   }
 }
 

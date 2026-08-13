@@ -11,7 +11,9 @@ jobs:
   e2e-test-linux:
     name: 'E2E Test (Linux) - ${{ matrix.sandbox }}'
     runs-on: 'ubuntu-latest'
+    if: "${{ secrets.OPENAI_API_KEY != '' }}"
     strategy:
+      fail-fast: false
       matrix:
         sandbox:
           - 'sandbox:none'
@@ -76,6 +78,7 @@ jobs:
   e2e-test-macos:
     name: 'E2E Test - macOS'
     runs-on: 'macos-latest'
+    if: "${{ secrets.OPENAI_API_KEY != '' }}"
     steps:
       - name: 'Checkout'
         uses: 'actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8' # ratchet:actions/checkout@v5

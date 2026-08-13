@@ -166,7 +166,7 @@ if (process.platform === 'win32') {
       '/d',
       '/s',
       '/c',
-      'echo NOOBI_PTY_OK',
+      'echo AETHER_PTY_OK',
     ], {
       name: 'xterm-color',
       cols: 80,
@@ -184,7 +184,7 @@ if (process.platform === 'win32') {
     });
     terminal.onExit(({ exitCode }) => {
       clearTimeout(timeout);
-      if (exitCode === 0 && output.includes('NOOBI_PTY_OK')) resolve();
+      if (exitCode === 0 && output.includes('AETHER_PTY_OK')) resolve();
       else reject(new Error('Windows PTY probe failed: ' + output));
     });
   });

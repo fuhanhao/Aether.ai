@@ -146,7 +146,7 @@ const cli = await run(applicationPath, [runtimeCli, '--help'], {
   },
   timeoutMs: 30_000,
 });
-if (!/Usage:\s+(?:opengame|gameagent|noobi)/i.test(cli.stdout)) {
+if (!/Usage:\s+(?:opengame|gameagent|aether)/i.test(cli.stdout)) {
   throw new Error(
     `打包 Runtime CLI --help 输出异常：\n${cli.stdout}\n${cli.stderr}`,
   );
@@ -168,15 +168,15 @@ console.log(
 
 async function runCleanInstallSmoke() {
   const installSandbox = await mkdtemp(
-    path.join(os.tmpdir(), 'noobi-windows-install-smoke-'),
+    path.join(os.tmpdir(), 'aether-windows-install-smoke-'),
   );
   const externalProject = await mkdtemp(
-    path.join(os.tmpdir(), 'noobi-external-project-smoke-'),
+    path.join(os.tmpdir(), 'aether-external-project-smoke-'),
   );
-  const installDirectory = path.join(installSandbox, 'Noobi.ai');
+  const installDirectory = path.join(installSandbox, 'Aether.ai');
   const profileDirectory = path.join(externalProject, 'profile');
-  const sentinelPath = path.join(externalProject, 'project-sentinel.noobi');
-  const sentinelContents = `Noobi.ai external project ${Date.now()}\n`;
+  const sentinelPath = path.join(externalProject, 'project-sentinel.aether');
+  const sentinelContents = `Aether.ai external project ${Date.now()}\n`;
   let uninstallerPath;
   let uninstallCompleted = false;
 
@@ -199,7 +199,7 @@ async function runCleanInstallSmoke() {
     await access(installedApplication);
     assertAmd64PortableExecutable(
       await readFile(installedApplication),
-      'installed Noobi.ai.exe',
+      'installed Aether.ai.exe',
     );
     for (const relativePath of REQUIRED_WINDOWS_RESOURCES) {
       await access(path.join(installedResources, ...relativePath.split('/')));
@@ -239,7 +239,7 @@ async function runCleanInstallSmoke() {
         timeoutMs: 30_000,
       },
     );
-    if (!/Usage:\s+(?:opengame|gameagent|noobi)/i.test(installedCli.stdout)) {
+    if (!/Usage:\s+(?:opengame|gameagent|aether)/i.test(installedCli.stdout)) {
       throw new Error('已安装 Runtime CLI --help 输出异常。');
     }
 
@@ -308,18 +308,18 @@ async function runPackagedSmoke(executable, cwd, baseEnvironment) {
     NO_COLOR: '1',
   };
   delete packagedSmokeEnvironment.ELECTRON_RUN_AS_NODE;
-  const packagedSmoke = await run(executable, ['--noobi-smoke-test'], {
+  const packagedSmoke = await run(executable, ['--aether-smoke-test'], {
     cwd,
     env: packagedSmokeEnvironment,
     timeoutMs: 15_000,
   });
   if (
     !`${packagedSmoke.stdout}\n${packagedSmoke.stderr}`.includes(
-      'NOOBI_PACKAGED_SMOKE_READY',
+      'AETHER_PACKAGED_SMOKE_READY',
     )
   ) {
     throw new Error(
-      `packaged app 冒烟未返回 NOOBI_PACKAGED_SMOKE_READY：\n` +
+      `packaged app 冒烟未返回 AETHER_PACKAGED_SMOKE_READY：\n` +
         `${packagedSmoke.stdout}\n${packagedSmoke.stderr}`,
     );
   }
@@ -347,7 +347,7 @@ async function removeOwnedTemporaryDirectory(target, label) {
     !relative ||
     relative.startsWith(`..${path.sep}`) ||
     path.isAbsolute(relative) ||
-    !path.basename(target).startsWith('noobi-')
+    !path.basename(target).startsWith('aether-')
   ) {
     throw new Error(`拒绝清理不受 verifier 管理的 ${label}：${target}`);
   }
@@ -362,7 +362,7 @@ async function removeOwnedTemporaryDirectory(target, label) {
 async function getVersionInfo(filePath) {
   return runPowerShellJson(
     `
-$item = Get-Item -LiteralPath $env:NOOBI_VERIFY_FILE
+$item = Get-Item -LiteralPath $env:AETHER_VERIFY_FILE
 $info = $item.VersionInfo
 [ordered]@{
   ProductName = [string]$info.ProductName
@@ -398,7 +398,7 @@ async function runPowerShellJson(script, filePath) {
     ],
     {
       cwd: desktopRoot,
-      env: { ...childEnvironment, NOOBI_VERIFY_FILE: filePath },
+      env: { ...childEnvironment, AETHER_VERIFY_FILE: filePath },
       timeoutMs: 30_000,
     },
   );
