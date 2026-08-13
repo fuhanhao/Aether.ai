@@ -8,10 +8,28 @@ on:
   merge_group:
 
 jobs:
+  e2e-gate:
+    name: 'E2E Gate'
+    runs-on: 'ubuntu-latest'
+    outputs:
+      enabled: '${{ steps.check.outputs.enabled }}'
+    steps:
+      - name: 'Check if API key is configured'
+        id: check
+        env:
+          OPENAI_API_KEY: '${{ secrets.OPENAI_API_KEY }}'
+        run: |-
+          if [ -n "$OPENAI_API_KEY" ]; then
+            echo 'enabled=true' >> "$GITHUB_OUTPUT"
+          else
+            echo 'enabled=false' >> "$GITHUB_OUTPUT"
+          fi
+
   e2e-test-linux:
     name: 'E2E Test (Linux) - ${{ matrix.sandbox }}'
     runs-on: 'ubuntu-latest'
-    if: "${{ secrets.OPENAI_API_KEY != '' }}"
+    needs: 'e2e-gate'
+    if: "${{ needs.e2e-gate.outputs.enabled == 'true' }}"
     strategy:
       fail-fast: false
       matrix:
@@ -78,7 +96,8 @@ jobs:
   e2e-test-macos:
     name: 'E2E Test - macOS'
     runs-on: 'macos-latest'
-    if: "${{ secrets.OPENAI_API_KEY != '' }}"
+    needs: 'e2e-gate'
+    if: "${{ needs.e2e-gate.outputs.enabled == 'true' }}"
     steps:
       - name: 'Checkout'
         uses: 'actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8' # ratchet:actions/checkout@v5
