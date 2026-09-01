@@ -169,10 +169,26 @@ export function App() {
 
   async function createProject(input: CreateProjectInput) {
     const project = await window.gameAgent.createProject(input);
-    setProjects((previous) => [project, ...previous]);
+    setProjects((previous) =>
+      previous.some((item) => item.id === project.id)
+        ? previous
+        : [project, ...previous],
+    );
     setSelectedId(project.id);
     setInstruction(project.prompt);
     setShowCreate(false);
+  }
+
+  async function deleteProject(project: ProjectRecord) {
+    try {
+      await window.gameAgent.deleteProject(project.id);
+      setProjects((previous) =>
+        previous.filter((item) => item.id !== project.id),
+      );
+      if (selectedId === project.id) setSelectedId(undefined);
+    } catch (reason) {
+      setError(toMessage(reason));
+    }
   }
 
   async function startAgent() {
@@ -226,6 +242,7 @@ export function App() {
         selectedId={selectedId}
         onHome={() => setSelectedId(undefined)}
         onSelect={(project) => setSelectedId(project.id)}
+        onDelete={deleteProject}
         onCreate={() => setShowCreate(true)}
         onSettings={() => setShowSettings(true)}
         onExtensions={() => setShowExtensions(true)}

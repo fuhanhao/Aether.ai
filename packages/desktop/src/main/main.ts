@@ -5,6 +5,7 @@ import {
   ipcMain,
   Menu,
   safeStorage,
+  screen,
   shell,
   type IpcMainInvokeEvent,
 } from 'electron';
@@ -21,6 +22,7 @@ import { testProviderConnection as probeProviderConnection } from './providerCon
 import { ApiUsageStore, usageFromProviderProbe } from './apiUsageStore.js';
 import { DependencyManager } from './dependencyManager.js';
 import { inspectDesktopPlatform } from './platformSupport.js';
+import { normalizeTypographicDashes } from './settingsNormalize.js';
 import type {
   AppSettings,
   CreateProjectInput,
@@ -160,11 +162,21 @@ async function createWindow(): Promise<void> {
   const rendererFile = path.join(__dirname, '..', 'renderer', 'index.html');
   trustedRendererUrl = developmentUrl ?? pathToFileURL(rendererFile).href;
 
+  const { workAreaSize } = screen.getPrimaryDisplay();
+  const width = Math.min(
+    1720,
+    Math.max(1180, Math.round(workAreaSize.width * 0.9)),
+  );
+  const height = Math.min(
+    1080,
+    Math.max(720, Math.round(workAreaSize.height * 0.9)),
+  );
   mainWindow = new BrowserWindow({
-    width: 1480,
-    height: 920,
-    minWidth: 1040,
-    minHeight: 680,
+    width,
+    height,
+    center: true,
+    minWidth: 1100,
+    minHeight: 720,
     backgroundColor: '#11120f',
     title: productName,
     icon: app.isPackaged ? undefined : developmentAppIcon,
@@ -298,7 +310,10 @@ function validateProviderEndpoint(
   if (parsed.protocol !== 'https:' && parsed.protocol !== 'http:') {
     throw new Error(`${key} Base URL 只允许 HTTP(S)。`);
   }
-  const model = typeof record.model === 'string' ? record.model.trim() : '';
+  const model =
+    typeof record.model === 'string'
+      ? normalizeTypographicDashes(record.model.trim())
+      : '';
   if (!model) throw new Error(`${key} Model 不能为空。`);
   const apiKey = typeof record.apiKey === 'string' ? record.apiKey.trim() : '';
   if (baseUrl.length > 2048 || model.length > 256 || apiKey.length > 8192) {
@@ -416,6 +431,25 @@ function registerIpc(): void {
     return project;
   });
 
+  secureHandle('project:delete', async (projectId: unknown) => {
+    const project = getProject(requireString(projectId, '项目 ID', 160));
+    const confirmation = await dialog.showMessageBox(mainWindow!, {
+      type: 'warning',
+      title: '删除项目',
+      message: `确定删除项目“${project.name}”？`,
+      detail:
+        '项目文件夹将被移到系统废纸篓，可从废纸篓恢复；项目记录删除后不可恢复。',
+      buttons: ['取消', '删除'],
+      defaultId: 0,
+      cancelId: 0,
+    });
+    if (confirmation.response !== 1) return;
+    await runner.stop(project.id).catch(() => undefined);
+    await projects.stopPreview(project.id).catch(() => undefined);
+    await store.deleteProject(project.id);
+    await shell.trashItem(project.path).catch(() => undefined);
+  });
+
   secureHandle('settings:save', (settings: unknown) =>
     store.saveSettings(validateSettings(settings)),
   );
@@ -501,6 +535,28 @@ function registerIpc(): void {
   secureHandle('project:start-preview', (projectId: unknown) =>
     projects.startPreview(getProject(requireString(projectId, '项目 ID', 160))),
   );
+
+  secureHandle('project:share-config', () => store.getSharePublishConfig());
+
+  secureHandle('project:share-token', (token: unknown) =>
+    store.saveSharePublishToken(requireString(token, '发布令牌', 4096)),
+  );
+
+  secureHandle('project:publish', (projectId: unknown, value: unknown) => {
+    if (
+      !value ||
+      typeof value !== 'object' ||
+      typeof (value as { endpoint?: unknown }).endpoint !== 'string' ||
+      typeof (value as { token?: unknown }).token !== 'string'
+    ) {
+      throw new Error('发布参数无效。');
+    }
+    const input = value as { endpoint: string; token: string };
+    return projects.publish(
+      getProject(requireString(projectId, '项目 ID', 160)),
+      { ...input, token: input.token.trim() || store.getSharePublishToken() },
+    );
+  });
 
   secureHandle('project:reveal', async (projectId: unknown) => {
     await shell.openPath(

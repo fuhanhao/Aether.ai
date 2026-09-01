@@ -12,7 +12,10 @@ export interface RunLivenessPolicy {
 const DEFAULT_POLICY: RunLivenessPolicy = {
   noticeAfterMs: 90_000,
   noticeEveryMs: 60_000,
-  timeoutAfterMs: 240_000,
+  // First-run dependency installs (npm install with native modules like
+  // canvas) can legitimately take several minutes with little output; the
+  // default hard timeout is raised so such rounds are not killed mid-way.
+  timeoutAfterMs: 600_000,
 };
 
 function bounded(value: number, fallback: number, min: number, max: number) {

@@ -5,9 +5,15 @@ import {
   Files,
   FolderOpen,
   RefreshCw,
+  Upload,
 } from 'lucide-react';
 import { useCallback, useEffect, useState } from 'react';
-import type { FileContent, FileNode, ProjectRecord } from '../../shared/types';
+import type {
+  FileContent,
+  FileNode,
+  ProjectRecord,
+  SharePublishConfig,
+} from '../../shared/types';
 import { FileTree } from './FileTree';
 
 interface InspectorProps {
@@ -24,6 +30,14 @@ export function Inspector({ project, refreshToken, onError }: InspectorProps) {
   const [files, setFiles] = useState<FileNode[]>([]);
   const [selectedFile, setSelectedFile] = useState<FileContent | null>(null);
   const [loadingPreview, setLoadingPreview] = useState(false);
+  const [publishing, setPublishing] = useState(false);
+  const [shareUrl, setShareUrl] = useState('');
+  const [showPublishForm, setShowPublishForm] = useState(false);
+  const [shareEndpoint, setShareEndpoint] = useState(
+    'http://47.79.240.52/aether-api',
+  );
+  const [publishToken, setPublishToken] = useState('');
+  const [shareConfig, setShareConfig] = useState<SharePublishConfig>();
 
   const refreshFiles = useCallback(async () => {
     try {
@@ -40,6 +54,13 @@ export function Inspector({ project, refreshToken, onError }: InspectorProps) {
   }, [project.id, refreshFiles]);
 
   useEffect(() => {
+    void window.gameAgent.loadSharePublishConfig().then((config) => {
+      setShareConfig(config);
+      setShareEndpoint(config.endpoint);
+    });
+  }, []);
+
+  useEffect(() => {
     if (project.status === 'completed' || tab === 'files') void refreshFiles();
   }, [refreshFiles, refreshToken, project.status, tab]);
 
@@ -52,6 +73,41 @@ export function Inspector({ project, refreshToken, onError }: InspectorProps) {
       onError(`${toMessage(error)}。请先让 Agent 完成构建。`);
     } finally {
       setLoadingPreview(false);
+    }
+  }
+
+  async function publishGame() {
+    if (!shareEndpoint.trim()) {
+      onError('请输入分享服务地址。');
+      return;
+    }
+    if (!publishToken.trim() && !shareConfig?.tokenConfigured) {
+      onError('请输入发布令牌。');
+      return;
+    }
+
+    setPublishing(true);
+    try {
+      if (publishToken.trim()) {
+        const config = await window.gameAgent.saveSharePublishToken(publishToken);
+        setShareConfig(config);
+      }
+      const result = await window.gameAgent.publishProject(project.id, {
+        endpoint: shareEndpoint,
+        token: publishToken,
+      });
+      setShareUrl(result.url);
+      setPublishToken('');
+      setShowPublishForm(false);
+      try {
+        await navigator.clipboard.writeText(result.url);
+      } catch {
+        // 链接仍会显示在界面中，用户可手动复制。
+      }
+    } catch (error) {
+      onError(toMessage(error));
+    } finally {
+      setPublishing(false);
     }
   }
 
@@ -130,6 +186,51 @@ export function Inspector({ project, refreshToken, onError }: InspectorProps) {
             </div>
           )}
           <div className="preview-footer">
+            <button
+              onClick={() => setShowPublishForm((current) => !current)}
+              disabled={publishing}
+            >
+              {publishing ? (
+                <RefreshCw className="spin" size={13} />
+              ) : (
+                <Upload size={13} />
+              )}
+              {showPublishForm ? '收起发布' : '发布游戏'}
+            </button>
+            {showPublishForm ? (
+              <div className="share-publish-form">
+                <input
+                  aria-label="分享服务地址"
+                  value={shareEndpoint}
+                  onChange={(event) => setShareEndpoint(event.target.value)}
+                  placeholder="分享服务地址"
+                />
+                <input
+                  aria-label="发布令牌"
+                  type="password"
+                  value={publishToken}
+                  onChange={(event) => setPublishToken(event.target.value)}
+                  placeholder={
+                    shareConfig?.tokenConfigured
+                      ? '已保存；留空则直接使用'
+                      : '首次发布请输入令牌'
+                  }
+                />
+                <button onClick={() => void publishGame()} disabled={publishing}>
+                  {publishing ? '上传中…' : '确认发布'}
+                </button>
+              </div>
+            ) : null}
+            {shareUrl ? (
+              <input
+                className="share-url"
+                aria-label="游戏分享链接"
+                readOnly
+                value={shareUrl}
+                onFocus={(event) => event.currentTarget.select()}
+                onClick={(event) => event.currentTarget.select()}
+              />
+            ) : null}
             <button
               onClick={() => void window.gameAgent.revealProject(project.id)}
             >

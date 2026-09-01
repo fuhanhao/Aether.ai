@@ -165,6 +165,8 @@ const PATTERNS: Array<[RegExp, TokenCount]> = [
   // -------------------
   // DeepSeek
   // -------------------
+  // DeepSeek V4 family advertises a 1M-token context window.
+  [/^deepseek-v4.*$/, LIMITS['1m']],
   [/^deepseek(?:-.*)?$/, LIMITS['128k']],
 
   // -------------------

@@ -393,11 +393,31 @@ export class ChatRecordingService {
    */
   recordUiTelemetryEvent(uiEvent: UiEvent): void {
     try {
+      // Cap the raw streaming payload persisted for metrics replay. The full
+      // per-token JSON response is very verbose (megabytes per turn) and
+      // otherwise bloats session files and slows every resume. Token counts
+      // used for metrics are unaffected.
+      let storedEvent: UiEvent = uiEvent;
+      const eventWithResponse = uiEvent as unknown as {
+        response_text?: string;
+      };
+      if (
+        typeof eventWithResponse.response_text === 'string' &&
+        eventWithResponse.response_text.length > 16_000
+      ) {
+        storedEvent = {
+          ...(uiEvent as object),
+          response_text:
+            eventWithResponse.response_text.slice(0, 4_000) +
+            '\n... [RESPONSE TEXT TRUNCATED] ...\n' +
+            eventWithResponse.response_text.slice(-4_000),
+        } as UiEvent;
+      }
       const record: ChatRecord = {
         ...this.createBaseRecord('system'),
         type: 'system',
         subtype: 'ui_telemetry',
-        systemPayload: { uiEvent },
+        systemPayload: { uiEvent: storedEvent },
       };
 
       this.appendRecord(record);

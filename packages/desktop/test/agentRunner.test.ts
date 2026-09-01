@@ -179,6 +179,21 @@ describe('desktop tool PATH', () => {
     expect(child.kill).not.toHaveBeenCalled();
   });
 
+  it('treats taskkill exit code 128 as success (process already gone)', async () => {
+    const child = fakeChild(4242);
+    const spawnCommand = vi.fn(() => closingCommand(128));
+
+    await expect(
+      terminateProcessTree(child, false, {
+        platform: 'win32',
+        environment: { SystemRoot: String.raw`C:\Windows` },
+        spawnCommand,
+      }),
+    ).resolves.toBeUndefined();
+
+    expect(child.kill).not.toHaveBeenCalled();
+  });
+
   it('reports tree termination as failed when taskkill exits unsuccessfully', async () => {
     const child = fakeChild(4242);
 

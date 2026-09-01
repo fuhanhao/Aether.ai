@@ -15,6 +15,8 @@ import type {
   FileContent,
   FileNode,
   ProjectRecord,
+  SharePublishInput,
+  SharePublishResult,
 } from '../shared/types.js';
 import type { StateStore } from './store.js';
 
@@ -26,6 +28,7 @@ const SKIP_DIRECTORIES = new Set([
 ]);
 const MAX_FILE_BYTES = 1024 * 1024;
 const MAX_TREE_ENTRIES = 1500;
+const MAX_SHARE_FILE_BYTES = 25 * 1024 * 1024;
 
 const MIME: Record<string, string> = {
   '.html': 'text/html; charset=utf-8',
@@ -227,6 +230,85 @@ export class ProjectManager {
     };
   }
 
+  async publish(
+    project: ProjectRecord,
+    input: SharePublishInput,
+  ): Promise<SharePublishResult> {
+    const endpoint = new URL(input.endpoint.trim());
+    if (!['http:', 'https:'].includes(endpoint.protocol)) {
+      throw new Error('分享服务地址必须使用 HTTP 或 HTTPS。');
+    }
+    const token = input.token.trim();
+    if (!token) throw new Error('请输入发布令牌。');
+
+    const dist = await this.resolveExistingInside(project.path, 'dist');
+    if (!dist.info.isDirectory()) throw new Error('游戏构建目录 dist 不存在。');
+    const index = await this.resolveExistingInside(dist.absolutePath, 'index.html');
+    if (!index.info.isFile()) {
+      throw new Error('游戏构建产物 dist/index.html 不存在。');
+    }
+
+    const files: Array<{ absolutePath: string; relativePath: string }> = [];
+    const walk = async (directory: string, prefix = ''): Promise<void> => {
+      const entries = await readdir(directory, { withFileTypes: true });
+      for (const entry of entries) {
+        const absolutePath = path.join(directory, entry.name);
+        const relativePath = prefix
+          ? path.posix.join(prefix, entry.name)
+          : entry.name;
+        const info = await lstat(absolutePath);
+        if (info.isSymbolicLink()) continue;
+        if (info.isDirectory()) {
+          await walk(absolutePath, relativePath);
+        } else if (info.isFile()) {
+          if (info.size > MAX_SHARE_FILE_BYTES) {
+            throw new Error(`文件过大，无法发布：${relativePath}`);
+          }
+          files.push({ absolutePath, relativePath });
+        }
+      }
+    };
+    await walk(dist.absolutePath);
+
+    const apiBase = endpoint.href.replace(/\/+$/, '');
+    const gameId = randomUUID().replace(/-/g, '');
+    for (const file of files) {
+      const pathPart = file.relativePath
+        .split('/')
+        .map((part: string) => encodeURIComponent(part))
+        .join('/');
+      const response = await fetch(
+        `${apiBase}/games/${gameId}/files/${pathPart}`,
+        {
+          method: 'PUT',
+          headers: {
+            Authorization: `Bearer ${token}`,
+            'Content-Type': 'application/octet-stream',
+          },
+          body: await readFile(file.absolutePath),
+        },
+      );
+      if (!response.ok) {
+        throw new Error(`上传失败：${file.relativePath}（HTTP ${response.status}）`);
+      }
+    }
+
+    const finalized = await fetch(`${apiBase}/games/${gameId}/finalize`, {
+      method: 'POST',
+      headers: { Authorization: `Bearer ${token}` },
+    });
+    if (!finalized.ok) {
+      throw new Error(`发布失败（HTTP ${finalized.status}）。`);
+    }
+    const body = (await finalized.json()) as { url?: string };
+    if (!body.url) throw new Error('分享服务未返回访问链接。');
+    return {
+      gameId,
+      files: files.length,
+      url: new URL(body.url, endpoint.origin).toString(),
+    };
+  }
+
   async startPreview(project: ProjectRecord): Promise<string> {
     let distResult: { absolutePath: string; info: Stats };
     try {
@@ -418,7 +500,7 @@ export class ProjectManager {
     return { absolutePath, info };
   }
 
-  private async stopPreview(projectId: string): Promise<void> {
+  async stopPreview(projectId: string): Promise<void> {
     const active = this.previews.get(projectId);
     if (!active) return;
     this.previews.delete(projectId);
