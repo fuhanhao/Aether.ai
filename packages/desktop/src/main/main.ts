@@ -212,11 +212,6 @@ async function createWindow(): Promise<void> {
   });
 
   mainWindow.once('ready-to-show', () => {
-    if (packagedSmokeTest) {
-      console.log('AETHER_PACKAGED_SMOKE_READY');
-      app.exit(0);
-      return;
-    }
     mainWindow?.show();
   });
 
@@ -706,6 +701,12 @@ app
       if (safeStorage.decryptString(encrypted) !== 'aether-smoke-sentinel') {
         throw new Error('系统安全存储往返验证失败。');
       }
+      // CI runners do not provide an interactive desktop reliably.  A packaged
+      // smoke test verifies Electron startup and secure storage, so it must not
+      // wait for a BrowserWindow renderer or a physical display.
+      console.log('AETHER_PACKAGED_SMOKE_READY');
+      app.exit(0);
+      return;
     }
     const paths = resolvePaths();
     store = new StateStore();
