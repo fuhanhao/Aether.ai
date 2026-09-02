@@ -143,9 +143,19 @@ export class ShellToolInvocation extends BaseToolInvocation<
       const shouldRunInBackground = this.params.is_background;
       let finalCommand = processedCommand;
 
-      // If explicitly marked as background and doesn't already end with &, add it
-      if (shouldRunInBackground && !finalCommand.trim().endsWith('&')) {
-        finalCommand = finalCommand.trim() + ' &';
+      if (shouldRunInBackground) {
+        if (isWindows) {
+          // cmd.exe has no `&` background operator: `npm run dev &` would run
+          // the command in the foreground and block the agent forever. Use
+          // `start /b` so the outer shell returns immediately, and redirect
+          // the started process's stdio so it does not hold the console open.
+          const command = finalCommand.trim();
+          finalCommand = command
+            ? `start "" /b cmd /c "${command.replace(/"/g, '""')} > NUL 2>&1"`
+            : command;
+        } else if (!finalCommand.trim().endsWith('&')) {
+          finalCommand = finalCommand.trim() + ' &';
+        }
       }
 
       // pgrep is not available on Windows, so we can't get background PIDs

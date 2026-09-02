@@ -1188,7 +1188,9 @@ export async function terminateProcessTree(
         killer.once('close', (exitCode) => {
           if (settled) return;
           settled = true;
-          if (exitCode === 0) resolve();
+          // taskkill exits 0 on success and 128 when no process matches
+          // (i.e. the target already exited), which is also a success.
+          if (exitCode === 0 || exitCode === 128) resolve();
           else reject(new Error(`taskkill 退出码：${exitCode ?? '未知'}`));
         });
       });

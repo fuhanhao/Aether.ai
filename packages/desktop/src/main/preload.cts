@@ -11,6 +11,7 @@ import type {
   McpServerDefinition,
   ProjectRecord,
   ProviderConnectionInput,
+  SharePublishInput,
   StartAgentInput,
 } from '../shared/types.js';
 
@@ -19,6 +20,8 @@ const api: GameAgentAPI = {
   chooseDirectory: () => ipcRenderer.invoke('dialog:choose-directory'),
   createProject: (input: CreateProjectInput) =>
     ipcRenderer.invoke('project:create', input),
+  deleteProject: (projectId: string) =>
+    ipcRenderer.invoke('project:delete', projectId),
   saveSettings: (settings: AppSettings) =>
     ipcRenderer.invoke('settings:save', settings),
   testProviderConnection: (input: ProviderConnectionInput) =>
@@ -39,6 +42,11 @@ const api: GameAgentAPI = {
     ipcRenderer.invoke('project:read-file', projectId, filePath),
   startPreview: (projectId: string) =>
     ipcRenderer.invoke('project:start-preview', projectId),
+  publishProject: (projectId: string, input: SharePublishInput) =>
+    ipcRenderer.invoke('project:publish', projectId, input),
+  loadSharePublishConfig: () => ipcRenderer.invoke('project:share-config'),
+  saveSharePublishToken: (token: string) =>
+    ipcRenderer.invoke('project:share-token', token),
   revealProject: (projectId: string) =>
     ipcRenderer.invoke('project:reveal', projectId),
   loadExtensions: (projectId?: string) =>

@@ -10,7 +10,7 @@ import type {
 } from '../shared/types.js';
 
 type ProviderSecretKey = 'main' | 'reasoning' | 'image' | 'video' | 'audio';
-type SecretKey = ProviderSecretKey | 'mcpServers';
+type SecretKey = ProviderSecretKey | 'mcpServers' | 'sharePublishToken';
 
 interface PersistedSettings {
   main: Omit<
@@ -182,6 +182,15 @@ export class StateStore {
     await this.flush();
   }
 
+  async deleteProject(id: string): Promise<ProjectRecord | undefined> {
+    const state = this.requireState();
+    const index = state.projects.findIndex((item) => item.id === id);
+    if (index < 0) return undefined;
+    const [removed] = state.projects.splice(index, 1);
+    await this.flush();
+    return removed;
+  }
+
   getPublicSettings(): AppSettings {
     const state = this.requireState();
     const hydrate = (key: ProviderSecretKey): ProviderEndpoint => ({
@@ -252,6 +261,27 @@ export class StateStore {
 
     await this.flush();
     return this.getPublicSettings();
+  }
+
+  getSharePublishConfig(): { endpoint: string; tokenConfigured: boolean } {
+    return {
+      endpoint: 'http://47.79.240.52/aether-api',
+      tokenConfigured: Boolean(this.decrypt(this.requireState().secrets.sharePublishToken)),
+    };
+  }
+
+  getSharePublishToken(): string {
+    return this.decrypt(this.requireState().secrets.sharePublishToken);
+  }
+
+  async saveSharePublishToken(
+    token: string,
+  ): Promise<{ endpoint: string; tokenConfigured: boolean }> {
+    const value = token.trim();
+    if (!value) throw new Error('发布令牌不能为空。');
+    this.requireState().secrets.sharePublishToken = this.encrypt(value);
+    await this.flush();
+    return this.getSharePublishConfig();
   }
 
   getPublicMcpServers(): McpServerDefinition[] {

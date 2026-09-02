@@ -552,6 +552,19 @@ export interface BuildApiHistoryOptions {
    * @default true
    */
   stripThoughtsFromHistory?: boolean;
+  /**
+   * Hard upper bound (in characters) for the reconstructed history.
+   * Oversized tool outputs are progressively truncated until the total
+   * fits under this budget, preventing context-window overflow errors.
+   * @default 1_200_000
+   */
+  maxHistoryChars?: number;
+  /**
+   * Initial per-tool-output character cap applied when the history exceeds
+   * the budget. The cap is progressively halved until the budget fits.
+   * @default 24_000
+   */
+  toolOutputCapChars?: number;
 }
 
 /**
@@ -586,11 +599,91 @@ function stripThoughtsFromContent(content: Content): Content | null {
  * - Append all messages after that checkpoint (skipping system records).
  * - If no checkpoint exists, return the linear message list (message field only).
  */
+/** Approximates the serialized size of a Content[] in characters. */
+function estimateHistoryChars(history: Content[]): number {
+  let total = 0;
+  for (const content of history) {
+    if (!content.parts) continue;
+    for (const part of content.parts) {
+      const p = part as {
+        text?: string;
+        thought?: string;
+        functionCall?: { args?: unknown };
+        functionResponse?: { response?: { output?: unknown } };
+      };
+      if (p.text) total += p.text.length;
+      if (p.thought) total += p.thought.length;
+      if (p.functionCall?.args !== undefined) {
+        try {
+          total += JSON.stringify(p.functionCall.args).length;
+        } catch {
+          total += 128;
+        }
+      }
+      if (p.functionResponse?.response && typeof p.functionResponse.response.output === 'string') {
+        total += p.functionResponse.response.output.length;
+      }
+    }
+  }
+  return total;
+}
+
+/** Truncates functionResponse outputs larger than cap to head+tail+marker. */
+function truncateFunctionResponseOutputs(
+  history: Content[],
+  capChars: number,
+): void {
+  for (const content of history) {
+    if (!content.parts) continue;
+    for (const part of content.parts) {
+      const p = part as {
+        functionResponse?: { response?: { output?: unknown } };
+      };
+      const fnResp = p.functionResponse;
+      if (!fnResp?.response) continue;
+      const output = fnResp.response.output;
+      if (typeof output !== 'string' || output.length <= capChars) continue;
+      const headChars = Math.floor(capChars / 5);
+      const tailChars = capChars - headChars;
+      fnResp.response.output =
+        output.slice(0, headChars) +
+        '\n... [CONTENT TRUNCATED] ...\n' +
+        output.slice(Math.max(0, output.length - tailChars));
+    }
+  }
+}
+
+/**
+ * Enforces a hard character budget on the model-facing history.
+ * Progressively shrinks oversized tool outputs until the total fits,
+ * preventing API "maximum context length" failures on resume.
+ */
+function applyHistoryBudget(
+  history: Content[],
+  maxHistoryChars: number,
+  initialToolCapChars: number,
+): Content[] {
+  if (maxHistoryChars <= 0) return history;
+  if (estimateHistoryChars(history) <= maxHistoryChars) return history;
+
+  let cap = Math.max(512, initialToolCapChars);
+  while (cap >= 512) {
+    truncateFunctionResponseOutputs(history, cap);
+    if (estimateHistoryChars(history) <= maxHistoryChars) break;
+    cap = Math.floor(cap / 2);
+  }
+  return history;
+}
+
 export function buildApiHistoryFromConversation(
   conversation: ConversationRecord,
   options: BuildApiHistoryOptions = {},
 ): Content[] {
-  const { stripThoughtsFromHistory = true } = options;
+  const {
+    stripThoughtsFromHistory = true,
+    maxHistoryChars = 1_200_000,
+    toolOutputCapChars = 24_000,
+  } = options;
   const { messages } = conversation;
 
   let lastCompressionIndex = -1;
@@ -621,11 +714,15 @@ export function buildApiHistoryFromConversation(
     }
 
     if (stripThoughtsFromHistory) {
-      return baseHistory
-        .map(stripThoughtsFromContent)
-        .filter((content): content is Content => content !== null);
+      return applyHistoryBudget(
+        baseHistory
+          .map(stripThoughtsFromContent)
+          .filter((content): content is Content => content !== null),
+        maxHistoryChars,
+        toolOutputCapChars,
+      );
     }
-    return baseHistory;
+    return applyHistoryBudget(baseHistory, maxHistoryChars, toolOutputCapChars);
   }
 
   // Fallback: return linear messages as Content[]
@@ -635,11 +732,15 @@ export function buildApiHistoryFromConversation(
     .map((message) => structuredClone(message));
 
   if (stripThoughtsFromHistory) {
-    return result
-      .map(stripThoughtsFromContent)
-      .filter((content): content is Content => content !== null);
+    return applyHistoryBudget(
+      result
+        .map(stripThoughtsFromContent)
+        .filter((content): content is Content => content !== null),
+      maxHistoryChars,
+      toolOutputCapChars,
+    );
   }
-  return result;
+  return applyHistoryBudget(result, maxHistoryChars, toolOutputCapChars);
 }
 
 /**

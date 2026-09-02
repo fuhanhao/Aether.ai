@@ -1,4 +1,4 @@
-import { Blocks, FolderOpen, Plus, Settings } from 'lucide-react';
+import { Blocks, FolderOpen, Plus, Settings, Trash2 } from 'lucide-react';
 import type { ProjectRecord } from '../../shared/types';
 import { gameAgentMascot as brandIcon } from '../assets';
 
@@ -7,6 +7,7 @@ interface ProjectRailProps {
   selectedId?: string;
   onHome: () => void;
   onSelect: (project: ProjectRecord) => void;
+  onDelete: (project: ProjectRecord) => void;
   onCreate: () => void;
   onSettings: () => void;
   onExtensions: () => void;
@@ -26,6 +27,7 @@ export function ProjectRail({
   selectedId,
   onHome,
   onSelect,
+  onDelete,
   onCreate,
   onSettings,
   onExtensions,
@@ -67,18 +69,30 @@ export function ProjectRail({
           </div>
         ) : (
           projects.map((project) => (
-            <button
-              className={`project-item ${project.id === selectedId ? 'is-active' : ''}`}
+            <div
+              className="project-item-wrap"
               key={project.id}
-              onClick={() => onSelect(project)}
             >
-              <span className={`status-dot status-${project.status}`} />
-              <span className="project-item-copy">
-                <strong>{project.name}</strong>
-                <small>{STATUS_LABEL[project.status]}</small>
-              </span>
-              <time>{formatRelative(project.updatedAt)}</time>
-            </button>
+              <button
+                className={`project-item ${project.id === selectedId ? 'is-active' : ''}`}
+                onClick={() => onSelect(project)}
+              >
+                <span className={`status-dot status-${project.status}`} />
+                <span className="project-item-copy">
+                  <strong>{project.name}</strong>
+                  <small>{STATUS_LABEL[project.status]}</small>
+                </span>
+                <time>{formatRelative(project.updatedAt)}</time>
+              </button>
+              <button
+                className="project-item-delete"
+                title="删除项目"
+                aria-label={`删除项目 ${project.name}`}
+                onClick={() => onDelete(project)}
+              >
+                <Trash2 size={14} />
+              </button>
+            </div>
           ))
         )}
       </nav>

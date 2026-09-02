@@ -300,10 +300,27 @@ export interface FileContent {
   truncated: boolean;
 }
 
+export interface SharePublishInput {
+  endpoint: string;
+  token: string;
+}
+
+export interface SharePublishResult {
+  gameId: string;
+  url: string;
+  files: number;
+}
+
+export interface SharePublishConfig {
+  endpoint: string;
+  tokenConfigured: boolean;
+}
+
 export interface GameAgentAPI {
   bootstrap(): Promise<BootstrapState>;
   chooseDirectory(): Promise<string | null>;
   createProject(input: CreateProjectInput): Promise<ProjectRecord>;
+  deleteProject(projectId: string): Promise<void>;
   saveSettings(settings: AppSettings): Promise<AppSettings>;
   testProviderConnection(
     input: ProviderConnectionInput,
@@ -319,6 +336,12 @@ export interface GameAgentAPI {
   listFiles(projectId: string): Promise<FileNode[]>;
   readFile(projectId: string, filePath: string): Promise<FileContent>;
   startPreview(projectId: string): Promise<string>;
+  publishProject(
+    projectId: string,
+    input: SharePublishInput,
+  ): Promise<SharePublishResult>;
+  loadSharePublishConfig(): Promise<SharePublishConfig>;
+  saveSharePublishToken(token: string): Promise<SharePublishConfig>;
   revealProject(projectId: string): Promise<void>;
   loadExtensions(projectId?: string): Promise<ExtensionsSnapshot>;
   saveMcpServers(

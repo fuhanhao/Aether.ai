@@ -168,7 +168,7 @@ export class GameOverUIScene extends Phaser.Scene {
 
   /** Stop BGM (supports both backgroundMusic and bgm property names) */
   private stopBgmAndCleanup(sceneKey: string): void {
-    const scene = this.scene.get(sceneKey) as
+    const scene = this.scene.get(sceneKey) as unknown as
       | Record<string, unknown>
       | undefined;
     const bgm = scene?.backgroundMusic ?? scene?.bgm;

@@ -12,8 +12,8 @@
   /* Text: cool white-blue */
   --text: #e0e4f5;
   --text-soft: #a0a8c8;
-  --muted: #5e668c;
-  --faint: #3a4060;
+  --muted: #8a93bd;
+  --faint: #67709b;
   /* Accent: holographic cyan */
   --accent: #00e5ff;
   --accent-soft: rgba(0, 229, 255, 0.10);
@@ -37,8 +37,10 @@
   /* Shadow: darker, deeper */
   --shadow: rgba(0, 0, 0, 0.55);
   /* Typography */
-  --sans: 'Inter', 'SF Pro Display', 'Noto Sans SC', sans-serif;
-  --mono: 'JetBrains Mono', 'SF Mono', 'Noto Sans Mono CJK SC', monospace;
+  --sans: 'Inter', 'SF Pro Display', 'Segoe UI', 'Microsoft YaHei UI',
+    'Microsoft YaHei', 'Noto Sans SC', sans-serif;
+  --mono: 'JetBrains Mono', 'SF Mono', 'Cascadia Code', 'Consolas',
+    'Noto Sans Mono CJK SC', monospace;
   /* Border radius */
   --radius-sm: 4px;
   --radius-md: 8px;
@@ -56,8 +58,8 @@
   --line-strong: #2a3050;
   --text: #e0e4f5;
   --text-soft: #a0a8c8;
-  --muted: #5e668c;
-  --faint: #3a4060;
+  --muted: #8a93bd;
+  --faint: #67709b;
   --accent: #00e5ff;
   --accent-soft: rgba(0, 229, 255, 0.10);
   --accent-ink: #05060d;
@@ -96,8 +98,7 @@ body {
   background: var(--bg);
   color: var(--text);
   font-family: var(--sans);
-  font-size: 14px;
-  -webkit-font-smoothing: antialiased;
+  font-size: 16px;
 }
 
 button,
@@ -148,7 +149,7 @@ pre {
 
 .loading-screen span {
   color: var(--muted);
-  font-size: 12px;
+  font-size: 13px;
 }
 
 .loading-mark {
@@ -180,20 +181,20 @@ pre {
 
 .project-rail {
   display: flex;
-  min-height: 72px;
+  min-height: 84px;
   align-items: center;
-  gap: 10px;
+  gap: 12px;
   border-bottom: 1px solid var(--line);
   background: var(--panel);
   overflow: hidden;
-  padding: 12px;
+  padding: 14px;
 }
 
 .brand-block {
   display: flex;
-  min-width: 175px;
+  min-width: 195px;
   align-items: center;
-  gap: 10px;
+  gap: 12px;
   border: 0;
   padding: 0;
   background: transparent;
@@ -210,13 +211,13 @@ pre {
 
 .brand-mark {
   display: grid;
-  width: 36px;
-  height: 36px;
-  flex: 0 0 36px;
+  width: 40px;
+  height: 40px;
+  flex: 0 0 40px;
   overflow: hidden;
   place-items: center;
   border: 1px solid var(--line-strong);
-  border-radius: 9px;
+  border-radius: 10px;
   background: #11130f;
 }
 
@@ -232,28 +233,28 @@ pre {
 }
 
 .brand-block strong {
-  font: 700 13px/1 var(--mono);
+  font: 700 14px/1 var(--mono);
   letter-spacing: 0.12em;
 }
 
 .brand-block span {
   margin-top: 5px;
   color: var(--muted);
-  font-size: 10px;
+  font-size: 14px;
 }
 
 .new-project-button,
 .rail-settings {
   display: inline-flex;
-  min-height: 40px;
+  min-height: 48px;
   align-items: center;
   justify-content: center;
-  gap: 8px;
+  gap: 9px;
   border: 1px solid var(--line-strong);
   background: transparent;
   color: var(--text-soft);
-  padding: 0 13px;
-  font-size: 12px;
+  padding: 0 15px;
+  font-size: 14px;
 }
 
 .new-project-button {
@@ -275,17 +276,22 @@ pre {
   overflow-x: auto;
 }
 
+.project-item-wrap {
+  position: relative;
+  flex: 0 0 auto;
+}
+
 .project-item {
   display: grid;
-  min-width: 174px;
-  height: 44px;
+  min-width: 200px;
+  height: 56px;
   grid-template-columns: 8px minmax(0, 1fr) auto;
   align-items: center;
-  gap: 8px;
+  gap: 10px;
   border: 1px solid transparent;
   background: transparent;
   color: var(--text);
-  padding: 4px 8px;
+  padding: 6px 34px 6px 10px;
   text-align: left;
 }
 
@@ -293,6 +299,34 @@ pre {
 .project-item.is-active {
   border-color: var(--line-strong);
   background: var(--panel-raised);
+}
+
+.project-item-delete {
+  position: absolute;
+  top: 50%;
+  right: 8px;
+  transform: translateY(-50%);
+  display: grid;
+  place-items: center;
+  width: 24px;
+  height: 24px;
+  border: 0;
+  border-radius: 5px;
+  background: transparent;
+  color: var(--muted);
+  opacity: 0.55;
+  cursor: pointer;
+}
+
+.project-item-wrap:hover .project-item-delete,
+.project-item-delete:focus-visible {
+  opacity: 1;
+}
+
+.project-item-delete:hover,
+.project-item-delete:focus-visible {
+  color: var(--red);
+  background: color-mix(in srgb, var(--red) 14%, transparent);
 }
 
 .project-item.is-active {
@@ -333,14 +367,14 @@ pre {
 }
 
 .project-item-copy strong {
-  font-size: 12px;
+  font-size: 13px;
   font-weight: 600;
 }
 
 .project-item-copy small,
 .project-item time {
   color: var(--muted);
-  font: 9px/1.3 var(--mono);
+  font: 13px/1.3 var(--mono);
 }
 
 .project-item-copy small {
@@ -374,10 +408,10 @@ pre {
 .topbar {
   position: relative;
   display: flex;
-  min-height: 52px;
-  flex: 0 0 52px;
+  min-height: 60px;
+  flex: 0 0 60px;
   align-items: center;
-  gap: 12px;
+  gap: 14px;
   border-bottom: 1px solid var(--line);
   background: var(--panel);
   padding: 0 12px;
@@ -394,7 +428,7 @@ pre {
   align-items: center;
   gap: 7px;
   color: var(--muted);
-  font: 10px/1 var(--mono);
+  font: 14px/1 var(--mono);
 }
 
 .runtime-light {
@@ -418,15 +452,15 @@ pre {
 }
 
 .project-heading strong {
-  font-size: 12px;
+  font-size: 13px;
   letter-spacing: 0.02em;
 }
 
 .status-chip {
   border: 1px solid var(--line-strong);
   color: var(--muted);
-  padding: 3px 6px;
-  font: 8px/1 var(--mono);
+  padding: 6px 10px;
+  font: 13px/1 var(--mono);
   letter-spacing: 0.08em;
 }
 
@@ -456,8 +490,8 @@ pre {
 .preview-toolbar button,
 .files-toolbar button {
   display: grid;
-  width: 32px;
-  height: 32px;
+  width: 36px;
+  height: 36px;
   place-items: center;
   border: 1px solid var(--line);
   background: transparent;
@@ -506,7 +540,7 @@ pre {
   align-items: center;
   justify-content: space-between;
   color: var(--faint);
-  font: 9px/1 var(--mono);
+  font: 13px/1 var(--mono);
   letter-spacing: 0.1em;
   text-transform: uppercase;
 }
@@ -522,13 +556,13 @@ pre {
 
 .pipeline li {
   display: grid;
-  min-width: 150px;
+  min-width: 176px;
   grid-template-columns: 23px 22px 1fr;
   align-items: center;
   gap: 5px;
   border: 1px solid var(--line);
   background: var(--panel-raised);
-  padding: 7px;
+  padding: 8px;
   opacity: 0.56;
 }
 
@@ -544,11 +578,11 @@ pre {
 
 .pipeline-index {
   display: grid;
-  height: 22px;
+  height: 26px;
   place-items: center;
   border-right: 1px solid var(--line);
   color: var(--faint);
-  font: 8px/1 var(--mono);
+  font: 13px/1 var(--mono);
 }
 
 .pipeline li.is-done .pipeline-index {
@@ -573,14 +607,14 @@ pre {
 }
 
 .pipeline li strong {
-  font-size: 10px;
+  font-size: 14px;
   font-weight: 600;
 }
 
 .pipeline li small {
   margin-top: 3px;
   color: var(--muted);
-  font-size: 8px;
+  font-size: 13px;
 }
 
 .event-stream {
@@ -632,7 +666,7 @@ pre {
 
 .brief-number {
   color: var(--accent);
-  font: 9px/1 var(--mono);
+  font: 13px/1 var(--mono);
   letter-spacing: 0.12em;
 }
 
@@ -658,7 +692,7 @@ pre {
   border-top: 1px solid var(--line);
   padding-top: 10px;
   color: var(--faint);
-  font: 9px/1.4 var(--mono);
+  font: 13px/1.4 var(--mono);
 }
 
 .brief-meta span {
@@ -685,7 +719,7 @@ pre {
 .stream-idle p {
   max-width: 340px;
   margin: 7px 20px 0;
-  font-size: 12px;
+  font-size: 13px;
   line-height: 1.6;
 }
 
@@ -697,7 +731,7 @@ pre {
   border-left: 2px solid var(--line-strong);
   color: var(--faint);
   padding: 5px 8px;
-  font: 8px/1.4 var(--mono);
+  font: 13px/1.4 var(--mono);
   letter-spacing: 0.04em;
 }
 
@@ -785,13 +819,13 @@ pre {
   border: 1px solid var(--line);
   color: var(--faint);
   padding: 2px 5px;
-  font: 8px/1 var(--mono);
+  font: 13px/1 var(--mono);
   white-space: nowrap;
 }
 
 .event-body header strong {
   overflow: hidden;
-  font-size: 11px;
+  font-size: 14px;
   font-weight: 600;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -799,7 +833,7 @@ pre {
 
 .event-body time {
   color: var(--faint);
-  font: 8px/1.5 var(--mono);
+  font: 13px/1.5 var(--mono);
 }
 
 .event-body pre,
@@ -808,7 +842,7 @@ pre {
   margin-top: 9px;
   overflow-wrap: anywhere;
   color: var(--text-soft);
-  font: 10px/1.65 var(--mono);
+  font: 14px/1.65 var(--mono);
 }
 
 .event-body pre.is-collapsed {
@@ -824,7 +858,7 @@ pre {
   background: var(--accent-soft);
   color: var(--accent);
   padding: 3px 6px;
-  font: 9px/1 var(--mono);
+  font: 13px/1 var(--mono);
 }
 
 .expand-event {
@@ -835,7 +869,7 @@ pre {
   background: transparent;
   color: var(--muted);
   padding: 3px 0;
-  font-size: 9px;
+  font-size: 13px;
 }
 
 .expand-event svg,
@@ -859,7 +893,7 @@ pre {
   align-items: center;
   gap: 7px;
   color: var(--accent);
-  font: 9px/1 var(--mono);
+  font: 13px/1 var(--mono);
 }
 
 .pulse-dot {
@@ -875,10 +909,10 @@ pre {
   display: grid;
   flex: 0 0 auto;
   grid-template-columns: minmax(0, 1fr) auto;
-  gap: 8px;
+  gap: 10px;
   border-top: 1px solid var(--line-strong);
   background: var(--panel);
-  padding: 10px 12px 8px;
+  padding: 12px 14px 10px;
 }
 
 .composer-label {
@@ -886,21 +920,21 @@ pre {
   grid-column: 1 / -1;
   justify-content: space-between;
   color: var(--muted);
-  font-size: 10px;
+  font-size: 14px;
 }
 
 .composer-label small {
-  font: 8px/1 var(--mono);
+  font: 13px/1 var(--mono);
 }
 
 .composer textarea {
   width: 100%;
-  min-height: 52px;
+  min-height: 60px;
   resize: none;
   border: 1px solid var(--line);
   border-radius: 0;
   background: var(--panel-raised);
-  padding: 10px 11px;
+  padding: 12px 13px;
   line-height: 1.55;
 }
 
@@ -915,7 +949,7 @@ pre {
 .hero-button,
 .preview-empty > button {
   display: inline-flex;
-  min-height: 44px;
+  min-height: 50px;
   align-items: center;
   justify-content: center;
   gap: 7px;
@@ -923,7 +957,7 @@ pre {
   background: var(--accent);
   color: var(--accent-ink);
   padding: 0 15px;
-  font-size: 11px;
+  font-size: 14px;
   font-weight: 700;
 }
 
@@ -937,7 +971,7 @@ pre {
   background: transparent;
   color: var(--text);
   padding: 0 15px;
-  font-size: 11px;
+  font-size: 14px;
   font-weight: 700;
 }
 
@@ -955,7 +989,7 @@ pre {
 .composer-hint {
   grid-column: 1 / -1;
   color: var(--faint);
-  font: 8px/1.3 var(--mono);
+  font: 13px/1.3 var(--mono);
 }
 
 .inspector {
@@ -985,7 +1019,7 @@ pre {
   border-right: 1px solid var(--line);
   background: transparent;
   color: var(--muted);
-  font-size: 10px;
+  font-size: 14px;
 }
 
 .inspector-tabs button.is-active {
@@ -1015,14 +1049,14 @@ pre {
 .preview-toolbar,
 .files-toolbar {
   display: flex;
-  min-height: 36px;
+  min-height: 42px;
   align-items: center;
-  gap: 9px;
+  gap: 10px;
   border-bottom: 1px solid var(--line);
   background: var(--panel-raised);
   padding: 0 8px;
   color: var(--faint);
-  font: 8px/1 var(--mono);
+  font: 13px/1 var(--mono);
 }
 
 .preview-toolbar > span {
@@ -1106,14 +1140,14 @@ pre {
 .preview-empty p {
   max-width: 250px;
   margin: 7px 18px 16px;
-  font-size: 11px;
+  font-size: 14px;
   line-height: 1.55;
 }
 
 .preview-empty > button {
   min-height: 36px;
   padding: 0 11px;
-  font-size: 10px;
+  font-size: 14px;
 }
 
 .preview-footer {
@@ -1131,7 +1165,36 @@ pre {
   gap: 5px;
   background: transparent;
   color: var(--muted);
-  font-size: 9px;
+  font-size: 13px;
+}
+
+.share-publish-form {
+  display: flex;
+  flex: 1 1 100%;
+  gap: 6px;
+  align-items: center;
+}
+
+.share-publish-form input {
+  min-width: 0;
+  flex: 1 1 160px;
+  padding: 6px 8px;
+  border: 1px solid var(--line, rgba(255, 255, 255, 0.18));
+  border-radius: 6px;
+  color: inherit;
+  background: transparent;
+  font: inherit;
+}
+
+.share-url {
+  min-width: 0;
+  flex: 1 1 240px;
+  padding: 6px 8px;
+  border: 1px solid var(--line, rgba(255, 255, 255, 0.18));
+  border-radius: 6px;
+  color: inherit;
+  background: transparent;
+  font: inherit;
 }
 
 .files-toolbar {
@@ -1177,7 +1240,7 @@ pre {
 
 .file-node span:last-child {
   overflow: hidden;
-  font: 9px/1 var(--mono);
+  font: 13px/1 var(--mono);
   text-overflow: ellipsis;
   white-space: nowrap;
 }
@@ -1198,7 +1261,7 @@ pre {
   justify-items: center;
   gap: 8px;
   color: var(--faint);
-  font-size: 10px;
+  font-size: 14px;
 }
 
 .code-pane {
@@ -1215,7 +1278,7 @@ pre {
   border-bottom: 1px solid var(--line);
   color: var(--muted);
   padding: 8px;
-  font: 8px/1 var(--mono);
+  font: 13px/1 var(--mono);
 }
 
 .code-pane pre {
@@ -1223,14 +1286,14 @@ pre {
   overflow: auto;
   padding: 12px;
   color: var(--text-soft);
-  font: 9px/1.65 var(--mono);
+  font: 13px/1.65 var(--mono);
 }
 
 .code-pane > small {
   border-top: 1px solid var(--line);
   color: var(--accent);
   padding: 6px 8px;
-  font-size: 8px;
+  font-size: 13px;
 }
 
 .empty-workspace {
@@ -1269,7 +1332,7 @@ pre {
   gap: 8px;
   margin-bottom: 32px;
   color: var(--faint);
-  font: 9px/1 var(--mono);
+  font: 13px/1 var(--mono);
 }
 
 .empty-sequence i {
@@ -1285,7 +1348,7 @@ pre {
 .eyebrow {
   margin: 0 0 14px;
   color: var(--accent);
-  font: 9px/1 var(--mono);
+  font: 13px/1 var(--mono);
   letter-spacing: 0.16em;
 }
 
@@ -1322,7 +1385,7 @@ pre {
   color: var(--faint);
   padding: 10px 16px 10px 0;
   margin-right: 16px;
-  font: 8px/1 var(--mono);
+  font: 13px/1 var(--mono);
 }
 
 .dialog-backdrop {
@@ -1356,7 +1419,7 @@ pre {
 
 .dialog-index {
   color: var(--accent);
-  font: 8px/1 var(--mono);
+  font: 13px/1 var(--mono);
   letter-spacing: 0.14em;
 }
 
@@ -1381,7 +1444,7 @@ pre {
   display: block;
   margin-bottom: 6px;
   color: var(--muted);
-  font: 9px/1 var(--mono);
+  font: 13px/1 var(--mono);
   letter-spacing: 0.05em;
   text-transform: uppercase;
 }
@@ -1410,7 +1473,7 @@ pre {
 
 .path-input input {
   border-right: 0;
-  font: 10px/1 var(--mono);
+  font: 14px/1 var(--mono);
 }
 
 .path-input button {
@@ -1421,7 +1484,7 @@ pre {
   background: var(--panel-soft);
   color: var(--text-soft);
   padding: 0 12px;
-  font-size: 10px;
+  font-size: 14px;
 }
 
 .prompt-examples {
@@ -1434,7 +1497,7 @@ pre {
 .prompt-examples > span {
   margin-right: 3px;
   color: var(--faint);
-  font-size: 9px;
+  font-size: 13px;
 }
 
 .prompt-examples button {
@@ -1443,7 +1506,7 @@ pre {
   border: 1px solid var(--line);
   background: transparent;
   color: var(--muted);
-  font: 8px/1 var(--mono);
+  font: 13px/1 var(--mono);
 }
 
 .prompt-examples button:hover {
@@ -1466,7 +1529,7 @@ pre {
   max-width: 330px;
   margin: 0;
   color: var(--faint);
-  font-size: 9px;
+  font-size: 13px;
   line-height: 1.5;
 }
 
@@ -1476,7 +1539,7 @@ pre {
   background: rgba(216, 120, 104, 0.08);
   color: var(--red);
   padding: 8px 10px;
-  font-size: 10px;
+  font-size: 14px;
 }
 
 .settings-dialog {
@@ -1517,13 +1580,13 @@ pre {
 }
 
 .settings-layout > nav button span {
-  font-size: 11px;
+  font-size: 14px;
   font-weight: 600;
 }
 
 .settings-layout > nav button small {
   margin-top: 5px;
-  font-size: 8px;
+  font-size: 13px;
   line-height: 1.4;
 }
 
@@ -1564,7 +1627,7 @@ pre {
 .provider-heading span {
   margin-top: 4px;
   color: var(--muted);
-  font-size: 9px;
+  font-size: 13px;
 }
 
 .security-note {
@@ -1572,7 +1635,7 @@ pre {
   align-items: flex-start;
   gap: 7px;
   color: var(--green);
-  font-size: 9px;
+  font-size: 13px;
   line-height: 1.5;
 }
 
@@ -1594,13 +1657,13 @@ pre {
 .permission-select select {
   min-height: 35px;
   padding: 6px 8px;
-  font-size: 10px;
+  font-size: 14px;
 }
 
 .save-message {
   flex: 1;
   color: var(--green);
-  font-size: 9px;
+  font-size: 13px;
   text-align: right;
 }
 
@@ -1661,7 +1724,7 @@ pre {
 .settings-nav-caption {
   margin: 1px 8px 10px;
   color: var(--faint);
-  font: 8px/1 var(--mono);
+  font: 13px/1 var(--mono);
   letter-spacing: 0.14em;
 }
 
@@ -1700,21 +1763,21 @@ pre {
 
 .settings-center-nav > button strong {
   color: var(--text);
-  font-size: 11px;
+  font-size: 14px;
 }
 
 .settings-center-nav > button small {
   overflow: hidden;
   margin-top: 4px;
   color: var(--muted);
-  font-size: 8px;
+  font-size: 13px;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
 
 .settings-center-nav > button > i {
   color: var(--faint);
-  font: normal 8px/1 var(--mono);
+  font: normal 13px/1 var(--mono);
 }
 
 .settings-center-nav > button.is-active > i {
@@ -1729,7 +1792,7 @@ pre {
   border-top: 1px solid var(--line);
   color: var(--green);
   padding: 13px 8px 4px;
-  font-size: 8px;
+  font-size: 13px;
   line-height: 1.55;
 }
 
@@ -1784,7 +1847,7 @@ pre {
 
 .settings-page-heading > div > span {
   color: var(--accent);
-  font: 8px/1 var(--mono);
+  font: 13px/1 var(--mono);
   letter-spacing: 0.13em;
 }
 
@@ -1797,7 +1860,7 @@ pre {
 .settings-page-heading p {
   margin: 0;
   color: var(--muted);
-  font-size: 9px;
+  font-size: 13px;
   line-height: 1.5;
 }
 
@@ -1913,7 +1976,7 @@ pre {
 .provider-slot-strip strong {
   margin-top: 5px;
   color: var(--text);
-  font-size: 10px;
+  font-size: 14px;
 }
 
 .provider-slot-strip span {
@@ -2004,7 +2067,7 @@ pre {
 .api-provider-form input,
 .api-provider-form select {
   min-height: 36px;
-  font-size: 10px;
+  font-size: 14px;
 }
 
 .security-note.warning {
@@ -2046,7 +2109,7 @@ pre {
 
 .panel-section-heading strong {
   margin-top: 5px;
-  font-size: 10px;
+  font-size: 14px;
 }
 
 .panel-section-heading > small {
@@ -2143,7 +2206,7 @@ pre {
 
 .work-call-copy strong {
   color: var(--text-soft);
-  font: 8px/1.25 var(--mono);
+  font: 13px/1.25 var(--mono);
   text-overflow: ellipsis;
   white-space: nowrap;
 }
@@ -2152,7 +2215,7 @@ pre {
   display: -webkit-box;
   margin-top: 6px;
   color: var(--muted);
-  font-size: 8px;
+  font-size: 13px;
   line-height: 1.45;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 2;
@@ -2171,7 +2234,7 @@ pre {
   background: var(--bg);
   color: var(--text-soft);
   padding: 10px 12px;
-  font: 8px/1.55 var(--mono);
+  font: 13px/1.55 var(--mono);
 }
 
 .api-call-row {
@@ -2221,7 +2284,7 @@ pre {
 }
 
 .api-call-main strong {
-  font-size: 9px;
+  font-size: 13px;
 }
 
 .api-call-main small {
@@ -2261,7 +2324,7 @@ pre {
 .settings-inline-loading {
   grid-auto-flow: column;
   align-items: center;
-  font-size: 9px;
+  font-size: 13px;
 }
 
 .settings-empty-state.compact {
@@ -2275,13 +2338,13 @@ pre {
 
 .settings-empty-state strong {
   color: var(--text-soft);
-  font-size: 10px;
+  font-size: 14px;
 }
 
 .settings-empty-state span {
   max-width: 300px;
   color: var(--faint);
-  font-size: 8px;
+  font-size: 13px;
   line-height: 1.5;
 }
 
@@ -2319,13 +2382,13 @@ pre {
 }
 
 .developer-mode-switch > div:nth-child(2) strong {
-  font-size: 11px;
+  font-size: 14px;
 }
 
 .developer-mode-switch > div:nth-child(2) span {
   margin-top: 5px;
   color: var(--muted);
-  font-size: 8px;
+  font-size: 13px;
 }
 
 .switch-control {
@@ -2339,7 +2402,7 @@ pre {
   background: var(--bg);
   color: var(--faint);
   padding: 5px 8px;
-  font: 8px/1 var(--mono);
+  font: 13px/1 var(--mono);
 }
 
 .switch-control i {
@@ -2387,7 +2450,7 @@ pre {
   place-items: center;
   border-right: 1px solid var(--line-strong);
   color: var(--muted);
-  font: 8px/1 var(--mono);
+  font: 13px/1 var(--mono);
   writing-mode: vertical-rl;
 }
 
@@ -2399,13 +2462,13 @@ pre {
 
 .developer-locked-state > strong {
   color: var(--text-soft);
-  font-size: 11px;
+  font-size: 14px;
 }
 
 .developer-locked-state > p {
   max-width: 390px;
   margin: 0;
-  font-size: 8px;
+  font-size: 13px;
   line-height: 1.6;
 }
 
@@ -2425,7 +2488,7 @@ pre {
   background: transparent;
   color: var(--muted);
   padding: 0 12px;
-  font-size: 9px;
+  font-size: 13px;
 }
 
 .developer-tabs > button.is-active {
@@ -2488,7 +2551,7 @@ pre {
   overflow: auto;
   color: var(--text-soft);
   padding: 12px;
-  font: 8px/1.65 var(--mono);
+  font: 13px/1.65 var(--mono);
 }
 
 .developer-data-note {
@@ -2497,7 +2560,7 @@ pre {
   background: var(--panel);
   color: var(--muted);
   padding: 8px 10px;
-  font-size: 8px;
+  font-size: 13px;
   line-height: 1.5;
 }
 
@@ -2539,7 +2602,7 @@ pre {
 .function-call-item strong {
   display: block;
   color: var(--text-soft);
-  font: 9px/1.2 var(--mono);
+  font: 13px/1.2 var(--mono);
 }
 
 .function-call-item pre {
@@ -2547,7 +2610,7 @@ pre {
   overflow: auto;
   margin-top: 7px;
   color: var(--muted);
-  font: 8px/1.55 var(--mono);
+  font: 13px/1.55 var(--mono);
 }
 
 .function-call-item time {
@@ -2601,7 +2664,7 @@ pre {
 
 .scheduler-state-copy strong {
   margin-top: 5px;
-  font-size: 11px;
+  font-size: 14px;
 }
 
 .scheduler-mode {
@@ -2641,7 +2704,7 @@ pre {
 .scheduler-metrics strong {
   margin-top: 10px;
   color: var(--text-soft);
-  font-size: 10px;
+  font-size: 14px;
 }
 
 .scheduler-metrics strong.is-mono {
@@ -2673,14 +2736,14 @@ pre {
 .scheduler-current-tool strong {
   margin-top: 6px;
   color: var(--text);
-  font: 10px/1.2 var(--mono);
+  font: 14px/1.2 var(--mono);
 }
 
 .scheduler-current-tool small {
   overflow: hidden;
   margin-top: 7px;
   color: var(--muted);
-  font-size: 8px;
+  font-size: 13px;
   line-height: 1.5;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -2755,7 +2818,7 @@ pre {
 
 .dependency-copy strong {
   overflow: hidden;
-  font-size: 10px;
+  font-size: 14px;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
@@ -2781,7 +2844,7 @@ pre {
 .dependency-copy p {
   margin: 7px 0 0;
   color: var(--muted);
-  font-size: 8px;
+  font-size: 13px;
   line-height: 1.45;
 }
 
@@ -2807,7 +2870,7 @@ pre {
 .dependency-actions button {
   min-height: 28px;
   padding: 0 9px;
-  font-size: 8px;
+  font-size: 13px;
 }
 
 .dependency-no-action {
@@ -2841,7 +2904,7 @@ pre {
 
 .dependency-log-panel > div strong {
   color: #ece9df;
-  font-size: 9px;
+  font-size: 13px;
 }
 
 .dependency-log-panel > div svg {
@@ -2854,7 +2917,7 @@ pre {
   overflow: auto;
   color: #b6c6af;
   padding: 11px;
-  font: 8px/1.55 var(--mono);
+  font: 13px/1.55 var(--mono);
 }
 
 .settings-center-footer {
@@ -2871,7 +2934,7 @@ pre {
   align-items: center;
   gap: 7px;
   color: var(--green);
-  font-size: 8px;
+  font-size: 13px;
   line-height: 1.4;
 }
 
@@ -2918,7 +2981,7 @@ pre {
   margin-left: auto;
   border: 1px solid var(--line-strong);
   padding: 2px 5px;
-  font: 8px/1 var(--mono);
+  font: 13px/1 var(--mono);
 }
 
 .capability-tabs button.is-active {
@@ -2950,13 +3013,13 @@ pre {
 
 .capability-empty strong {
   color: var(--text-soft);
-  font-size: 12px;
+  font-size: 13px;
 }
 
 .capability-empty p {
   max-width: 330px;
   margin: 0;
-  font-size: 10px;
+  font-size: 14px;
   line-height: 1.6;
 }
 
@@ -2997,19 +3060,19 @@ pre {
 }
 
 .capability-toolbar strong {
-  font-size: 12px;
+  font-size: 13px;
 }
 
 .capability-toolbar span {
   margin-top: 4px;
   color: var(--muted);
-  font-size: 9px;
+  font-size: 13px;
 }
 
 .compact-button {
   min-height: 32px;
   padding: 0 9px;
-  font-size: 9px;
+  font-size: 13px;
 }
 
 .github-install-trigger {
@@ -3068,7 +3131,7 @@ pre {
 
 .github-skill-heading strong {
   color: var(--text);
-  font: 9px/1 var(--mono);
+  font: 13px/1 var(--mono);
   letter-spacing: 0.1em;
   text-transform: uppercase;
 }
@@ -3076,7 +3139,7 @@ pre {
 .github-skill-heading span {
   margin-top: 4px;
   color: var(--muted);
-  font-size: 8px;
+  font-size: 13px;
 }
 
 .github-skill-grid {
@@ -3098,7 +3161,7 @@ pre {
 .dialog .github-skill-grid select {
   min-height: 36px;
   padding: 7px 9px;
-  font: 9px/1.2 var(--mono);
+  font: 13px/1.2 var(--mono);
 }
 
 .github-ref-input {
@@ -3126,7 +3189,7 @@ pre {
 .github-skill-actions p {
   margin: 0;
   color: var(--faint);
-  font-size: 8px;
+  font-size: 13px;
   line-height: 1.45;
 }
 
@@ -3134,7 +3197,7 @@ pre {
   min-height: 34px;
   flex: 0 0 auto;
   padding: 0 12px;
-  font-size: 9px;
+  font-size: 13px;
 }
 
 .skill-source-strip {
@@ -3155,7 +3218,7 @@ pre {
   background: transparent;
   color: var(--faint);
   padding: 8px 12px;
-  font: 8px/1 var(--mono);
+  font: 13px/1 var(--mono);
   text-overflow: ellipsis;
   white-space: nowrap;
 }
@@ -3221,7 +3284,7 @@ pre {
   background: transparent;
   color: var(--faint);
   padding: 0 8px;
-  font: 8px/1 var(--mono);
+  font: 13px/1 var(--mono);
 }
 
 .catalog-filters button:hover,
@@ -3251,7 +3314,7 @@ pre {
 .dialog .catalog-level-select select {
   min-height: 30px;
   padding: 4px 7px;
-  font-size: 8px;
+  font-size: 13px;
 }
 
 .catalog-review-note {
@@ -3263,7 +3326,7 @@ pre {
   background: color-mix(in srgb, var(--green) 5%, var(--panel));
   color: var(--muted);
   padding: 9px 11px;
-  font-size: 8px;
+  font-size: 13px;
   line-height: 1.45;
 }
 
@@ -3312,13 +3375,13 @@ pre {
 }
 
 .catalog-card-heading strong {
-  font-size: 11px;
+  font-size: 14px;
 }
 
 .catalog-card-heading small {
   margin-top: 4px;
   color: var(--faint);
-  font: 8px/1 var(--mono);
+  font: 13px/1 var(--mono);
 }
 
 .capability-icon-tile {
@@ -3454,7 +3517,7 @@ pre {
   min-height: 42px;
   margin: 10px 0 9px;
   color: var(--muted);
-  font-size: 9px;
+  font-size: 13px;
   line-height: 1.55;
 }
 
@@ -3478,7 +3541,7 @@ pre {
   gap: 5px;
   margin-bottom: 8px;
   color: var(--accent);
-  font-size: 8px;
+  font-size: 13px;
   line-height: 1.4;
 }
 
@@ -3501,7 +3564,7 @@ pre {
   gap: 5px;
   margin: -1px 0 8px;
   color: var(--red);
-  font-size: 8px;
+  font-size: 13px;
   line-height: 1.4;
 }
 
@@ -3525,7 +3588,7 @@ pre {
   align-items: center;
   gap: 5px;
   padding: 0 9px;
-  font-size: 8px;
+  font-size: 13px;
 }
 
 .catalog-source-button {
@@ -3590,13 +3653,13 @@ pre {
 }
 
 .skill-copy strong {
-  font-size: 11px;
+  font-size: 14px;
 }
 
 .skill-copy p {
   margin: 5px 0;
   color: var(--muted);
-  font-size: 10px;
+  font-size: 14px;
   line-height: 1.45;
 }
 
@@ -3604,7 +3667,7 @@ pre {
   display: block;
   overflow: hidden;
   color: var(--faint);
-  font: 8px/1.2 var(--mono);
+  font: 13px/1.2 var(--mono);
   text-overflow: ellipsis;
   white-space: nowrap;
 }
@@ -3681,7 +3744,7 @@ pre {
   border-bottom: 1px solid var(--line);
   color: var(--faint);
   padding: 0 10px 0 13px;
-  font: 8px/1 var(--mono);
+  font: 13px/1 var(--mono);
   letter-spacing: 0.12em;
 }
 
@@ -3726,19 +3789,19 @@ pre {
 }
 
 .mcp-server-list > button strong {
-  font-size: 10px;
+  font-size: 14px;
 }
 
 .mcp-server-list > button small {
   margin-top: 4px;
   color: var(--faint);
-  font: 8px/1 var(--mono);
+  font: 13px/1 var(--mono);
 }
 
 .mcp-list-empty {
   color: var(--faint);
   padding: 18px 13px;
-  font-size: 9px;
+  font-size: 13px;
 }
 
 .mcp-form {
@@ -3772,13 +3835,13 @@ pre {
 
 .mcp-form-heading strong {
   color: var(--text);
-  font-size: 11px;
+  font-size: 14px;
 }
 
 .mcp-form-heading small {
   margin-top: 4px;
   color: var(--muted);
-  font-size: 8px;
+  font-size: 13px;
 }
 
 .mcp-form-grid {
@@ -3798,7 +3861,7 @@ pre {
   gap: 7px;
   margin: 0 !important;
   color: var(--muted);
-  font: 8px/1 var(--mono);
+  font: 13px/1 var(--mono);
 }
 
 .capability-switch input,
@@ -3837,7 +3900,7 @@ pre {
   border-bottom: 1px solid var(--line);
   color: var(--muted);
   padding: 0 8px 0 10px;
-  font: 8px/1 var(--mono);
+  font: 13px/1 var(--mono);
   letter-spacing: 0.08em;
   text-transform: uppercase;
 }
@@ -3848,7 +3911,7 @@ pre {
   gap: 4px;
   background: transparent;
   color: var(--green);
-  font-size: 8px;
+  font-size: 13px;
 }
 
 .secret-field-row {
@@ -3874,7 +3937,7 @@ pre {
   margin-top: 4px;
   background: transparent;
   color: var(--red);
-  font-size: 9px;
+  font-size: 13px;
 }
 
 .extensions-footer {
@@ -3893,7 +3956,7 @@ pre {
   align-items: flex-start;
   gap: 6px;
   color: var(--green);
-  font-size: 8px;
+  font-size: 13px;
   line-height: 1.45;
 }
 
@@ -3905,7 +3968,7 @@ pre {
   min-width: 0;
   flex: 1;
   color: var(--accent);
-  font-size: 9px;
+  font-size: 13px;
   line-height: 1.4;
   text-align: right;
 }
@@ -3924,7 +3987,7 @@ pre {
   box-shadow: 8px 8px 0 rgba(0, 0, 0, 0.3);
   color: var(--red);
   padding: 12px 13px;
-  font-size: 11px;
+  font-size: 14px;
   line-height: 1.5;
 }
 
@@ -4168,8 +4231,12 @@ pre {
   .project-item {
     width: 100%;
     min-width: 0;
-    height: 52px;
+    height: 60px;
     margin-top: 4px;
+  }
+
+  .project-item-wrap {
+    width: 100%;
   }
 
   .project-empty {
@@ -4182,11 +4249,11 @@ pre {
 
   .project-empty p {
     margin: 9px 0 3px;
-    font-size: 11px;
+    font-size: 14px;
   }
 
   .project-empty span {
-    font-size: 9px;
+    font-size: 13px;
   }
 
   .rail-settings {
